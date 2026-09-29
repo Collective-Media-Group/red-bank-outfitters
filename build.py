@@ -11,7 +11,10 @@ EMAIL = "Hunting@RedBankOutfitters.com"
 SITE_URL = "https://red-bank-outfitters.netlify.app"
 # The ranch OS. Served at /os on this domain via a Netlify proxy rewrite,
 # so it stays one URL for the client while deploying as its own project.
-OS_PATH = "/os"
+# Set to None until the OS is actually deployed — a Ranch Login that 404s
+# on a live client site is worse than no link. Set it back to "/os" and
+# rebuild the moment the proxy resolves.
+OS_PATH = None
 
 def r(depth, p):
     return ("../" * depth) + p
@@ -165,7 +168,7 @@ def footer(depth):
       <span>&copy; Red Bank Outfitters · Est. 1965</span>
       <span class="mono">Red Bluff, California · 18,000 ac</span>
       <span>The 1965 Society · By arrangement</span>
-      <a class="os-login" href="{OS_PATH}">Ranch Login</a>
+      {f'<a class="os-login" href="{OS_PATH}">Ranch Login</a>' if OS_PATH else ""}
     </div>
   </div>
 </footer>
