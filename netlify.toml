@@ -35,3 +35,18 @@
   for = "/styles.css"
   [headers.values]
     Cache-Control = "public, max-age=3600"
+
+# The ranch OS. It deploys as its own Netlify project (red-bank-ai-os) so its
+# own gated deploy script keeps working, and is proxied in here so the client
+# has one address rather than two.
+[[redirects]]
+  from = "/os"
+  to = "https://red-bank-ai-os.netlify.app"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/os/*"
+  to = "https://red-bank-ai-os.netlify.app/:splat"
+  status = 200
+  force = true
