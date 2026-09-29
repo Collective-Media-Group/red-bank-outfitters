@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://red-bank-outfitters.netlify.app/sitemap.xml

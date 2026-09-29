@@ -6,6 +6,9 @@ ROOT = Path(__file__).parent
 PHONE = "(530) 529-9435"
 TEL = "tel:+15305299435"
 EMAIL = "Hunting@RedBankOutfitters.com"
+# Canonical origin for canonical tags, robots.txt and sitemap.xml.
+# Change this one line when a custom domain is pointed at the site.
+SITE_URL = "https://red-bank-outfitters.netlify.app"
 
 def r(depth, p):
     return ("../" * depth) + p
@@ -214,7 +217,6 @@ def head(depth, title, desc, extra=""):
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -1024,14 +1026,25 @@ add("hunts/wild-hog.html", page(1, "Wild Hog — Red Bank Outfitters",
  ("lodge.html","lodge.jpg","Stay","Lodge or bunkhouse."),
  ("gallery.html","hog-record.jpg","440 lb","Ranch record, 2011.")]))
 
+def canonical_for(rel):
+    """Absolute canonical URL for a generated page. index.html canonicalises
+    to the bare origin, not /index.html."""
+    return SITE_URL + "/" + ("" if rel == "index.html" else rel)
+
 def write_all():
     for rel, html in PAGES:
         path = ROOT / rel
         path.parent.mkdir(parents=True, exist_ok=True)
+        # head() has no idea which page it is building, so the canonical is
+        # stamped here, where rel is known. Without it the copy still served
+        # from GitHub Pages would read as duplicate content.
+        tag = f'<link rel="canonical" href="{canonical_for(rel)}">\n'
+        html = html.replace("</head>", tag + "</head>", 1)
         path.write_text(html)
         print("wrote", rel, "bytes", path.stat().st_size)
 
-    (ROOT / "robots.txt").write_text("User-agent: *\nDisallow: /\n")
+    (ROOT / "robots.txt").write_text(
+        "User-agent: *\nAllow: /\n\nSitemap: " + SITE_URL + "/sitemap.xml\n")
     (ROOT / "llms.txt").write_text("""# Red Bank Outfitters
 > Private hunting ranch, Red Bluff, California. Est. 1965.
 
@@ -1058,7 +1071,7 @@ def write_all():
     ]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>','<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u in urls:
-        sm.append(f"  <url><loc>/{u}</loc></url>")
+        sm.append(f"  <url><loc>{canonical_for(u)}</loc></url>")
     sm.append("</urlset>")
     (ROOT / "sitemap.xml").write_text("\n".join(sm))
     print("pages", len(PAGES))

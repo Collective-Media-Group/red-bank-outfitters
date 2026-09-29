@@ -1,0 +1,15 @@
+# Static site: no build step, the repo root is the published site.
+[build]
+  publish = "."
+  command = ""
+
+# Long-lived binaries. Filenames change when the asset changes.
+[[headers]]
+  for = "/video/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
