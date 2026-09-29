@@ -71,7 +71,7 @@ def nav(depth, active=""):
       </div>
     </div>
     <div class="nav-right">
-      <a class="book-btn" href="{p("contact.html")}">Inquire</a>
+      <a class="book-btn" href="{p("contact.html")}">Book a Hunt</a>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
         <span class="menu-btn-lines" aria-hidden="true"><span></span><span></span><span></span></span>
         <span class="menu-btn-label mono">Menu</span>
@@ -111,9 +111,8 @@ def drawer(depth):
     </nav>
     <nav class="drawer-col" aria-label="Media">
       <h4 class="mono">Media</h4>
-      <a href="{p("gallery.html")}">Photo Gallery</a>
+      <a href="{p("gallery.html")}">Gallery</a>
       <a href="{p("news.html")}">News</a>
-      <a href="https://www.youtube.com/watch?v=NSwut20idpI" target="_blank" rel="noopener">The Film <span class="ext">↗</span></a>
     </nav>
     <nav class="drawer-col" aria-label="Academy">
       <h4 class="mono">Academy</h4>
@@ -128,8 +127,32 @@ def drawer(depth):
   </div>
 </aside>'''
 
-def announce():
-    return ""
+def announce(depth=0):
+    return f'''
+<div class="announce" id="announce">
+  <div class="announce-inner">
+    <span class="announce-text">Now accepting reservations for the 26–27 season and lodge accommodations.</span>
+    <a class="announce-cta" href="{r(depth, "lodge.html")}">Reserve dates</a>
+    <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>'''
+
+def consent():
+    return '''
+<aside id="consent-banner" class="consent hidden" role="dialog" aria-modal="false" aria-labelledby="consent-title">
+  <div class="consent-card">
+    <div class="consent-copy">
+      <div class="mono consent-kicker">Privacy Choices</div>
+      <h2 id="consent-title">Website tracking and privacy choices</h2>
+      <p>We use cookies and similar technologies on this website. Some are necessary to operate and secure the site. Others are optional and are used only with your consent — they may collect information such as your IP address, device and browser details, pages visited, and interactions, which may be shared with analytics and marketing providers. Under California law this may be considered a &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of personal information, even though we do not sell personal information for money.</p>
+      <p>You may reject optional technologies or change your choice at any time via <strong>Privacy Choices</strong> in the footer. We honor Global Privacy Control signals where required by law.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" data-consent-accept class="btn-primary">Accept all</button>
+      <button type="button" data-consent-reject class="btn-ghost">Reject optional</button>
+    </div>
+  </div>
+</aside>'''
 
 def footer(depth):
     p = lambda x: r(depth, x)
@@ -167,7 +190,7 @@ def footer(depth):
     <div class="foot-bot">
       <span>&copy; Red Bank Outfitters · Est. 1965</span>
       <span class="mono">Red Bluff, California · 18,000 ac</span>
-      <span>The 1965 Society · By arrangement</span>
+      <a href="#" data-open-consent>Privacy Choices</a>
       {f'<a class="os-login" href="{OS_PATH}">Ranch Login</a>' if OS_PATH else ""}
     </div>
   </div>
@@ -189,7 +212,7 @@ def news_modal():
   <div class="news-grid">
     <aside class="news-media" aria-hidden="true">
       <div class="news-media-ph"></div>
-      <div class="news-badge mono">Call the Lodge</div>
+      <div class="news-badge mono">Contact Us</div>
       <div class="news-media-cap mono">Season dates by phone</div>
     </aside>
     <div class="news-body">
@@ -204,12 +227,12 @@ def news_modal():
         <div class="news-field"><label for="newsPhone">Mobile number</label><input type="tel" id="newsPhone" name="phone" autocomplete="tel" inputmode="tel" required></div>
         <label class="news-opt"><input type="checkbox" id="newsSms" name="sms" checked><span>Text me season openers. Msg &amp; data rates may apply. Reply STOP to unsubscribe.</span></label>
         <button type="submit" class="news-submit">Join the list</button>
-        <p class="news-fine mono">We never share your info. For a hunt, call (530) 529-9435.</p>
+        <p class="news-fine mono">We never share your info. For reservations and pricing, contact us at (530) 529-9435.</p>
       </form>
       <div class="news-thanks" id="newsThanks" hidden>
         <div class="mono news-eyebrow" style="color:var(--brass)">— Confirmed</div>
         <h3>Thank you.</h3>
-        <p>If you need dates this week, call the lodge at (530) 529-9435.</p>
+        <p>Need dates this week? Contact us at (530) 529-9435 and we will make it work.</p>
       </div>
     </div>
   </div>
@@ -240,11 +263,12 @@ def wrap(depth, title, desc, body, active="", inner=True):
     cls = "inner" if inner else ""
     return f'''{head(depth, title, desc)}
 <body class="{cls}" data-root="{root}">
-{announce()}
+{announce(depth)}
 {nav(depth, active)}
 {drawer(depth)}
 {body}
 {footer(depth)}
+{consent()}
 {news_modal()}
 <script src="{r(depth, "script.js")}"></script>
 <!-- Marker.io feedback widget (preview only) -->
@@ -271,16 +295,16 @@ def aside(extra_rows=None):
     rows = extra_rows or []
     base = [
         ("Phone", f'<a href="{TEL}">{PHONE}</a>'),
-        ("Email", f'<a href="mailto:{EMAIL}">Hunting@…</a>'),
+        ("Email", f'<a href="mailto:{EMAIL}">{EMAIL}</a>'),
         ("Address", "18875 Red Bank Rd.<br>Red Bluff, CA 96080"),
-        ("Mail", "PO Box 8295"),
     ] + rows
     rows_html = "".join(f'<div class="row"><span>{k}</span><b>{v}</b></div>' for k, v in base)
     return f'''<aside class="aside">
-      <h3>Inquire of the lodge</h3>
-      <p>Reservations by telephone. Groups are not mixed. No minimum party size.</p>
+      <h3>Booking and Reservations</h3>
+      <p>Contact us for reservations and pricing. Groups are never mixed, and there is no minimum party size.</p>
       {rows_html}
-      <a class="btn-primary" href="{TEL}" style="margin-top:20px;width:100%;text-align:center">Telephone {PHONE}</a>
+      <a class="btn-primary" href="{TEL}" style="margin-top:20px;width:100%;text-align:center">Call Us at {PHONE}</a>
+      <a class="btn-ghost" href="mailto:{EMAIL}" style="margin-top:10px;width:100%;text-align:center;justify-content:center">Send message</a>
     </aside>'''
 
 def related_html(depth, cards):
@@ -335,23 +359,16 @@ f'''
       <span class="mono">Est. 1965 · Red Bluff, California</span>
     </div>
     <h1 id="heroH1">
-      The private
-      <span class="rotator" id="rotator" aria-live="polite">
-        <em class="rot-word active" data-i="0">quail</em>
-        <em class="rot-word" data-i="1">blacktail</em>
-        <em class="rot-word" data-i="2">hog</em>
-        <em class="rot-word" data-i="3">bass</em>
-        <em class="rot-word" data-i="4">clays</em>
-      </span>
-      <br>ranch. Since 1965.
+      The private Southern-style quail hunting ranch.
+      <br>Since 1965.
     </h1>
     <p class="hero-sub">
-      Eighteen thousand acres. One gate.
+      The premier California hunting and outfitters destination — eighteen thousand acres on the banks of Red Bank Creek in Red Bluff, greater Northern California.
     </p>
     <div class="hero-foot">
       <div class="hero-cta-row">
-        <a class="btn-primary" href="contact.html">Inquire</a>
-        <a class="btn-ghost" href="https://www.youtube.com/watch?v=NSwut20idpI" target="_blank" rel="noopener">The Film</a>
+        <a class="btn-primary" href="contact.html">Book a Hunt</a>
+        <a class="btn-ghost" href="https://www.youtube.com/watch?v=NSwut20idpI" target="_blank" rel="noopener">Explore the Ranch</a>
       </div>
       <div class="hero-meta">
         <div class="cell"><div class="k">Ranch</div><div class="v">18,000 ac</div></div>
@@ -360,12 +377,30 @@ f'''
       </div>
     </div>
   </div>
-  <div class="scroll-hint"><span class="bar"></span><span>Scroll</span></div>
 </header>
 
-<section class="press">
-  <span class="mono k">As seen in</span>
-  <p>Outdoor Channel · Sportsman Channel · Field &amp; Stream · Outdoor Life Network · Engel’s Outdoor Experience</p>
+<section class="seenin" aria-label="As seen on">
+  <div class="seenin-label-row">
+    <span class="seenin-label"><span class="rule-sm"></span>As seen on<span class="rule-sm"></span></span>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-group">
+        <div class="seenin-logo"><span class="seenin-word">OUTDOOR</span><span class="seenin-sub">Channel</span></div>
+        <div class="seenin-logo"><span class="seenin-word seenin-ser">Sportsman</span><span class="seenin-sub">Channel</span></div>
+        <div class="seenin-logo"><span class="seenin-word seenin-ser">Field <em>&amp;</em> Stream</span></div>
+        <div class="seenin-logo"><span class="seenin-mark">OLN</span><span class="seenin-sub">Outdoor Life Network</span></div>
+        <div class="seenin-logo"><span class="seenin-script">Engel&rsquo;s</span><span class="seenin-sub">Outdoor Experience</span></div>
+      </div>
+      <div class="marquee-group" aria-hidden="true">
+        <div class="seenin-logo"><span class="seenin-word">OUTDOOR</span><span class="seenin-sub">Channel</span></div>
+        <div class="seenin-logo"><span class="seenin-word seenin-ser">Sportsman</span><span class="seenin-sub">Channel</span></div>
+        <div class="seenin-logo"><span class="seenin-word seenin-ser">Field <em>&amp;</em> Stream</span></div>
+        <div class="seenin-logo"><span class="seenin-mark">OLN</span><span class="seenin-sub">Outdoor Life Network</span></div>
+        <div class="seenin-logo"><span class="seenin-script">Engel&rsquo;s</span><span class="seenin-sub">Outdoor Experience</span></div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="about" id="ranch">
@@ -456,8 +491,8 @@ f'''
       </div>
       <div class="house-item">
         <span class="n mono">04</span>
-        <h3>By telephone</h3>
-        <p>Reservations are taken at the lodge. Rates are not posted.</p>
+        <h3>Reservations</h3>
+        <p>Contact us for reservations and pricing — we will build the trip around you.</p>
       </div>
     </div>
   </div>
@@ -558,9 +593,9 @@ f'''
 <section class="cta" id="contact">
   <div class="cta-bg"></div>
   <div class="cta-inner">
-    <h2 class="reveal">A private season. <em>Telephone the lodge.</em></h2>
+    <h2 class="reveal">A private season. <em>Book yours today.</em></h2>
     <div class="cta-side reveal">
-      <p>Dates, parties, and the table are arranged by phone. The lodge will help you build a hunt, a weekend, or a private event around the days that suit you.</p>
+      <p>Contact us for reservations and pricing. We will help you build a hunt, a weekend, or a private event around the days that suit you.</p>
       <div class="season-picker">
         <div class="sp-cell"><div class="k">Phone</div><a class="v" href="{TEL}">{PHONE}</a></div>
         <div class="sp-cell"><div class="k">Location</div><div class="v">18875 Red Bank Rd., Red Bluff CA 96080</div></div>
@@ -587,7 +622,7 @@ add("the-ranch.html", page(0, "The Ranch — Red Bank Outfitters",
 "18,000 acres on Red Bank Creek west of Red Bluff. Founded in 1965 as Red Bank Ale & Quail.",
 "stay",
 [("Home","index.html"),("The Ranch","")],
-"Eighteen thousand acres on <em>Red Bank Creek.</em>",
+"The Ranch",
 "West of Red Bluff in Tehama County. One of the oldest hunting clubs in California, opened to an exclusive clientele in 1965.",
 [("Founded","1965"),("Acres","18,000"),("County","Tehama")],
 "creek.jpg", "Red earth bluffs over a Northern California creek in oak country",
@@ -609,10 +644,10 @@ DEFAULT_REL, generated=True))
 add("hunts.html", page(0, "The Hunt — Red Bank Outfitters",
 "Two guests, one guide, three or four dogs. Groups are not mixed. Since 1965 in Red Bluff.",
 "upland",
-[("Home","index.html"),("The Hunt","")],
-"Two guns. One guide. <em>Three or four dogs.</em>",
+[("Home","index.html"),("Hunting","")],
+"Southern-style quail hunting",
 "Thoughts of Southern-style quail hunting call up field edges and head-high brush. It does not have to be a memory.",
-[("Party","2 hunters"),("Guide","1"),("Dogs","3–4")],
+[],
 "hunt-ridge.jpg", "Oak savanna ridges west of Red Bluff at first light, fog in the creek bottom",
 '''<p class="deck">Since 1965 the goal at Red Bank has been the quail hunt. We do not mix groups. That is the whole point of coming.</p>
 <p>We can put 14 people in the main lodge and 6 in the bunkhouse. There is no minimum group size. The trip is about your enjoyment.</p>
@@ -628,16 +663,16 @@ add("hunts.html", page(0, "The Hunt — Red Bank Outfitters",
 <li><a href="hunts/blacktail.html">Blacktail deer</a> — three days, all inclusive</li>
 <li><a href="hunts/wild-hog.html">Wild hog</a> — UTV or on foot, 18,000 acres</li>
 </ul>''',
-[("2","Guests per party"),("1","Guide"),("3–4","Dogs")],
-DEFAULT_REL, generated=True))
+[],
+DEFAULT_REL))
 
 add("upland.html", page(0, "Upland Game — Red Bank Outfitters",
 "Bobwhite, valley and mountain quail, chukar, pheasant, European-style drives, and Rio Grande turkey in Red Bluff, California.",
 "upland",
 [("Home","index.html"),("Upland","")],
-"Upland on the <em>Red Bank</em> ranch.",
+"Upland Game",
 "A menu of California birds, walked up or driven, with dogs that live for it.",
-[("Species","7"),("Dogs","On site"),("Season","Call")],
+[("Species","7"),("Dogs","On site"),("Season","Inquire")],
 "upland-cover.jpg", "Golden bunch grass and brush at the edge of a blue oak grove",
 '''<p class="deck">Red Bank was built as a quail club. Everything else on the ranch grew out of that.</p>
 <p>Bobwhite is the plantation walk-up: two guns, a guide, a brace of dogs, field edges and flats of head-height brush. Valley quail is a different animal — wild birds, a short California season from October through January, hunted Texas-style on 5,000 acres just north of the ranch, groups of up to four, out of utility vehicles. Mountain quail live in the chaparral a 30-minute drive west; you listen at daylight for a bird more often heard than seen.</p>
@@ -658,7 +693,7 @@ add("big-game.html", page(0, "Big Game — Red Bank Outfitters",
 "Blacktail deer and wild hog hunts on 18,000 acres west of Red Bluff, California.",
 "big",
 [("Home","index.html"),("Big Game","")],
-"Blacktail and hog. <em>California big game.</em>",
+"Big Game",
 "A managed blacktail herd on more than 10,000 acres, and wild hog on the whole ranch.",
 [("Deer","3-day"),("Hog","Year-round*"),("Cold storage","Walk-in")],
 "deer.jpg", "A Columbia blacktail buck taken at Red Bank",
@@ -679,13 +714,13 @@ add("bass.html", page(0, "Bass Fishing — Red Bank Outfitters",
 "Largemouth bass on 11 ponds at Red Bank Outfitters, Red Bluff. One-day packages include lodging. California fishing license required.",
 "bass",
 [("Home","index.html"),("Bass","")],
-"Largemouth on <em>eleven ponds.</em>",
+"Bass Fishing",
 "Fish between hunts. Osprey, golden eagles, deer, turkey, hogs, coyotes, migratory ducks and Canada geese use the same water.",
 [("Ponds","11"),("License","CA required"),("Package","Day + lodging")],
 "pond.jpg", "A still bass pond in Northern California oak hills at dusk",
 '''<p class="deck">Largemouth bass take the eleven ponds. One-day packages include lodging. Bring a California fishing license.</p>
 <p>The water is also a wildlife sit. Osprey and golden eagles. Upland birds, deer, wild turkeys, wild hogs, coyotes. Migratory ducks and Canada geese. Songbirds including the western kingbird and Lewis's woodpecker.</p>
-<p>Call the lodge for dates. A fishing day is often stacked with clays or an afternoon walk-up.</p>''',
+<p>Contact us for dates. A fishing day is often stacked with clays or an afternoon walk-up.</p>''',
 [("11","Ponds"),("1","Day packages"),("CA","License")],
 [("clays.html","clays-station.jpg","Sporting <em>clays</em>","18 stations over water and through oaks."),
  ("upland.html","dogs-water.jpg","Upland <em>game</em>","Birds the same week."),
@@ -695,13 +730,13 @@ add("clays.html", page(0, "Sporting Clays — Red Bank Outfitters",
 "18-station sporting clays course at Red Bank Outfitters, Red Bluff. Over water, through brush and valley oaks. Loaner shotguns and ammunition available.",
 "bass",
 [("Home","index.html"),("Clays","")],
-"Eighteen stations. <em>Every angle.</em>",
+"Sporting Clays",
 "Practice and competition over water, through brush, and under valley oaks. Loaner shotguns, ammunition, ear plugs, and shooting glasses on site.",
 [("Stations","18"),("Loaners","Yes"),("Safety","On site")],
 "clays-station.jpg", "A sporting clays stand under valley oaks on a Northern California ranch",
 '''<p class="deck">An 18-station course. You will be shot at from every angle the oak country can invent.</p>
 <p>Targets run over water, through brush, and under valley oaks. Loaner shotguns and ammunition are available, plus ear plugs and shooting glasses.</p>
-<p>The photograph of a gun over a pond is from the ranch. Call for a clays-only afternoon or add it between hunts.</p>''',
+<p>The photograph of a gun over a pond is from the ranch. Ask us about a clays-only afternoon, or add it between hunts.</p>''',
 [("18","Stations"),("Oaks","The course"),("Loaners","Guns & shells")],
 [("bass.html","pond.jpg","Bass <em>ponds</em>","Eleven of them."),
  ("upland.html","dogs-water.jpg","Then <em>birds</em>","Warm up the gun."),
@@ -711,7 +746,7 @@ add("kennels.html", page(0, "Kennels — Red Bank Outfitters",
 "Over 30 professionally trained bird dogs at Red Bank Outfitters. Training, breeding, pointers, and kennels at both the lodge and bunkhouse.",
 "bass",
 [("Home","index.html"),("Kennels","")],
-"The dogs are the <em>heart of the hunt.</em>",
+"Kennels",
 "Over 30 professionally trained bird dogs. Training, breeding, pointers. Kennels at both buildings. Your own dogs are welcome.",
 [("Dogs","30+"),("Buildings","2 kennels"),("Your dogs","Welcome")],
 "dogs-water.jpg", "A pointer and a Labrador in a ranch pond under oaks",
@@ -721,33 +756,115 @@ add("kennels.html", page(0, "Kennels — Red Bank Outfitters",
 [("30+","Trained dogs"),("2","Kennel buildings"),("Yes","Your dogs")],
 DEFAULT_REL))
 
-add("lodge.html", page(0, "The Lodge — Red Bank Outfitters",
-"Grand Lodge at Red Bank Outfitters sleeps 14. Fireplace, full kitchen, poker table, three showers, porch, kennel, wifi. Red Bluff, California.",
-"stay",
-[("Home","index.html"),("Lodge","")],
-"The Grand Lodge. <em>Sleeps fourteen.</em>",
-"A fireplace. The table. Three showers. The house is yours.",
-[("Sleeps","14"),("Showers","3"),("Kitchen","Full")],
-"lodge.jpg", "Interior of the Red Bank Outfitters lodge — fireplace wall, sofas, mounts",
-'''<p class="deck">The Grand Lodge is the main house. Fourteen beds. Three showers. A fireplace. The kitchen, the poker table, the porch.</p>
-<p>Groups are not mixed. The lodge is yours. Shellie Riley keeps the books, the meals, and the calendar. Telephone for dates.</p>
-<ul>
-<li>Sleeps up to 14</li>
-<li>Three full showers</li>
-<li>Fireplace and big-screen TV with satellite</li>
-<li>Full kitchen, poker table, large porch, barbecue, wifi</li>
-<li>Dog kennel on site</li>
-</ul>''',
-[("14","Beds"),("3","Showers"),("1","Lodge")],
-[("bunkhouse.html","bunkhouse-porch.jpg","The <em>Bunkhouse</em>","Sleeps six. Stone-column porch."),
+
+GRAND_LODGE_BODY = f'''
+<header class="hero">
+  <div class="hero-media" style="background-image:url('img/lodge-exterior.jpg')"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dash"></span>
+      <span class="mono">Opening Fall 2026 · Accepting Reservations</span>
+    </div>
+    <h1>The Lodge</h1>
+    <p class="hero-sub">
+      The newly built, state-of-the-art lodge on Red Bank Creek — fourteen beds,
+      one private party at a time.
+    </p>
+    <div class="hero-foot">
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="contact.html">Book Your Stay</a>
+        <a class="btn-ghost" href="{TEL}">Call Us at {PHONE}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="sec">
+    <div class="sec-head reveal">
+      <div class="mono label">01 — The House</div>
+      <h2>Newly built. <em>State of the art.</em> Still run the old way.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p>The Lodge is the main house of the ranch — built new, appointed for the evening after the hunt, and never shared. Fourteen beds, three full showers, a great room under a fireplace wall, and the long table where the household staff serve supper.</p>
+        <p>Groups are not mixed. The lodge is yours for the length of your stay, with kennels on site and the porch looking over the creek country.</p>
+        <div class="about-stats">
+          <div class="stat"><div class="num" data-counter="14">0</div><div class="lbl mono">Beds</div></div>
+          <div class="stat"><div class="num" data-counter="3">0</div><div class="lbl mono">Full showers</div></div>
+          <div class="stat"><div class="num" data-counter="1">0</div><div class="lbl mono">Party at a time</div></div>
+        </div>
+      </div>
+      <div class="about-img reveal">
+        <div class="ph" style="background-image:url('img/lodge.jpg')"></div>
+        <div class="cap"><span class="d"></span><span class="mono">The great room</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="parallax-band" style="background-image:url('img/pavilion-dusk.jpg')" role="img" aria-label="The lodge pavilion at dusk — string lights over the covered patio"></div>
+
+<section class="house">
+  <div class="house-inner">
+    <div class="sec-head reveal">
+      <div class="mono label">02 — Appointments</div>
+      <h2>Everything the evening needs <em>after the hunt.</em></h2>
+    </div>
+    <div class="house-grid">
+      <div class="house-item">
+        <span class="n mono">01</span>
+        <h3>The great room</h3>
+        <p>A fireplace wall, deep sofas, and a big screen with satellite.</p>
+      </div>
+      <div class="house-item">
+        <span class="n mono">02</span>
+        <h3>The loft</h3>
+        <p>The game room upstairs — cards, the poker table, a nightcap.</p>
+      </div>
+      <div class="house-item">
+        <span class="n mono">03</span>
+        <h3>The kitchen</h3>
+        <p>A full kitchen and the long table. Meals prepared by the household staff.</p>
+      </div>
+      <div class="house-item">
+        <span class="n mono">04</span>
+        <h3>The practical</h3>
+        <p>Three full showers, wifi, a large porch, a barbecue, and kennels on site.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{related_html(0, [
+ ("bunkhouse.html","bunkhouse-porch.jpg","The <em>Bunkhouse</em>","Sleeps six. Stone-column porch."),
  ("dining.html","dining.jpg","The <em>Table</em>","Household staff and California wine."),
- ("weddings.html","creek.jpg","Weddings","2,200 sq ft covered patio.")]))
+ ("weddings.html","pavilion-dusk.jpg","Weddings","2,200 sq ft covered patio on the creek.")])}
+
+<section class="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <h2 class="reveal">The lodge is yours. <em>Book your stay.</em></h2>
+    <div class="cta-side reveal">
+      <p>Reservations for the 26–27 season are open now. Contact us for dates and pricing, and we will take care of the rest.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn-primary" href="contact.html">Book Your Stay</a>
+        <a class="btn-ghost" href="{TEL}">{PHONE}</a>
+      </div>
+    </div>
+  </div>
+</section>
+'''
+add("lodge.html", wrap(0, "The Lodge — Red Bank Outfitters",
+"The newly built, state-of-the-art lodge at Red Bank Outfitters, Red Bluff — opening fall 2026 and accepting reservations. Sleeps fourteen. One party at a time.",
+GRAND_LODGE_BODY, active="stay", inner=False))
 
 add("bunkhouse.html", page(0, "The Bunkhouse — Red Bank Outfitters",
 "Deluxe bunkhouse at Red Bank Outfitters sleeps 6. Full kitchen, satellite TV, dog kennel, barbecue, wifi. Red Bluff, California.",
 "stay",
 [("Home","index.html"),("Bunkhouse","")],
-"The bunkhouse. <em>Sleeps six.</em>",
+"The Bunkhouse",
 "After meals in the Grand Lodge, retire here. Satellite, a kitchen, a kennel, a barbecue, wifi.",
 [("Sleeps","6"),("Kitchen","Full"),("Kennel","Yes")],
 "bunkhouse-porch.jpg", "Covered porch of the Red Bank bunkhouse with river-stone columns",
@@ -768,7 +885,7 @@ add("dining.html", page(0, "Dining — Red Bank Outfitters",
 "Home-cooked meals and California wines at Red Bank Outfitters. Day shooters: two days' notice, arrive by 1 p.m.",
 "stay",
 [("Home","index.html"),("Dining","")],
-"The table. <em>Home cooking.</em>",
+"Dining",
 "Meals prepared and served by the household staff. A selection of California wines. Breakfasts before the walk-up.",
 [("Notice","2 days"),("Day hunt","Arrive 1 p.m."),("Wine","California")],
 "dining.jpg", "The lodge dining room and a table of hunters at Red Bank",
@@ -780,43 +897,132 @@ add("dining.html", page(0, "Dining — Red Bank Outfitters",
  ("weddings.html","creek.jpg","Events","Patio and creek bluffs."),
  ("hunts.html","dogs-water.jpg","Then <em>out</em>","Birds after lunch.")]))
 
-add("weddings.html", page(0, "Weddings — Red Bank Outfitters",
-"Northern California outdoor ranch wedding venue on Red Bank Creek, Red Bluff. 2,200 sq ft covered patio, 1,800 sq ft lodge, creek bluffs.",
-"stay",
-[("Home","index.html"),("Weddings","")],
-"A ranch wedding on <em>Red Bank Creek.</em>",
-"Creek bluffs, a 2,200-square-foot covered patio, and an 1,800-square-foot lodge. Schedule a visit.",
-[("Patio","2,200 sq ft"),("Lodge","1,800 sq ft"),("Since","1965")],
-"pavilion-dusk.jpg", "The lodge pavilion at dusk — string lights, fire pit and covered patio",
-'''<p class="deck">After years of corporate outings, the ranch opened as a wedding venue. Rustic, private, and six miles from town.</p>
-<p>The backdrop is the Red Bank Creek bluffs. A 2,200-square-foot covered patio holds dinner and dancing. The 1,800-square-foot lodge has a private bathroom for the bridal party and a separate bathroom for the groomsmen.</p>
-<p>Founded in 1965. Call for a site visit. Do not mail a deposit until you have walked the patio.</p>''',
-[("2,200","Sq ft patio"),("1,800","Sq ft lodge"),("2","Prep baths")],
-[("dining.html","dining.jpg","The <em>kitchen</em>","Same staff."),
- ("lodge.html","lodge.jpg","The <em>Lodge</em>","Bridal party rooms."),
-  ("contact.html","ranch-dog.jpg","See it","Six miles from town.")], generated=True, gen_note="Architectural rendering of the lodge pavilion — not a photograph."))
+WEDDINGS_BODY = f'''
+<header class="page-hero">
+  <div class="ph-bg" style="background-image:url('img/wedding-venue-wide-01.jpg')" role="img" aria-label="Hay-bale ceremony seating and a vintage car beneath the Red Bank Creek bluffs at golden hour"></div>
+  <div class="page-hero-inner">
+    {crumbs([("Home","index.html"),("Weddings","")])}
+    <h1>Weddings</h1>
+    <p class="lead">A Northern California ranch wedding on Red Bank Creek — red bluffs, golden fields, and the whole ranch to yourselves.</p>
+    <div class="ph-meta">
+      <div><div class="k">Patio</div><div class="v">2,200 sq ft</div></div>
+      <div><div class="k">Lodge</div><div class="v">1,800 sq ft</div></div>
+      <div><div class="k">Tours</div><div class="v">By appointment</div></div>
+    </div>
+  </div>
+</header>
 
-add("rates.html", page(0, "Rates — Red Bank Outfitters",
-"Call (530) 529-9435 for current Red Bank Outfitters hunt and lodging rates. Blacktail hunts are 3-day all-inclusive.",
-"big",
-[("Home","index.html"),("Rates","")],
-"Rates. <em>Call the lodge.</em>",
-"Pricing is not posted. Call (530) 529-9435. Blacktail hunts include guide, lodging, meals, and field dressing.",
-[("Phone", PHONE),("Deer","3-day incl."),("Day hunt","By arrangement")],
-"ranch-dog.jpg", "A ranch dog looking over Tehama cattle hills",
-'''<p class="deck">Please call {phone} for pricing. That is the published rate sheet.</p>
-<p>What we can say from their own pages: a blacktail hunt is a three-day all-inclusive — guide, lodging, meals, field dressing ready for the butcher. Day shooters give two days' notice and arrive by 1 p.m. for lunch and an afternoon hunt. Bass packages can include lodging. California licenses and tags are yours to bring.</p>
-<p>Groups are not mixed. No minimum party size. Lodge sleeps 14, bunkhouse sleeps 6.</p>'''.format(phone=PHONE),
-[("Call","For the number"),("3-day","Deer package"),("2-day","Notice, day hunts")],
-DEFAULT_REL))
+<div class="wstory">
+
+  <div class="wrow reveal">
+    <div class="wimg"><div class="ph" style="background-image:url('img/wedding-edit18.jpg')" role="img" aria-label="The ceremony meadow and the red bluffs of Red Bank Creek"></div></div>
+    <div class="wtxt">
+      <div class="mono k">01 — The Setting</div>
+      <h2>Married under the <em>red bluffs.</em></h2>
+      <p>Red Bank sits on the banks of Red Bank Creek, west of Red Bluff. Since 1965 the ranch has hosted astronauts, Hollywood figures, and sports celebrities — and after years of requests, it opened its gates for weddings.</p>
+      <p>The ceremony meadow faces the creek bluffs: a wall of red earth crowned with valley oaks that turns to gold in the evening light.</p>
+    </div>
+  </div>
+
+  <div class="wrow flip reveal">
+    <div class="wimg"><div class="ph" style="background-image:url('img/wedding-dress-hanging-01.jpg')" role="img" aria-label="A lace wedding dress hanging from the birch ceremony arch, bluffs behind"></div></div>
+    <div class="wtxt">
+      <div class="mono k">02 — The Morning</div>
+      <h2>Room to get <em>ready.</em></h2>
+      <p>The 1,800-square-foot lodge is yours for the day — a private suite and bathroom where the bridal party prepares, and separate quarters for the groomsmen.</p>
+      <p>No rushing and no sharing. The house, the porch, and the morning belong to your party alone.</p>
+    </div>
+  </div>
+
+  <div class="wrow reveal">
+    <div class="wimg"><div class="ph" style="background-image:url('img/wedding-long-shot-alter-01.jpg')" role="img" aria-label="Birch arch with roses at the head of a hay-bale aisle, red bluffs behind"></div></div>
+    <div class="wtxt">
+      <div class="mono k">03 — The Ceremony</div>
+      <h2>Vows in the <em>open air.</em></h2>
+      <p>A birch arch dressed in roses. Hay-bale pews down a mown aisle. Wine barrels, shepherd's hooks, and a hand-painted welcome sign. Behind it all, the bluffs.</p>
+      <p>It is the kind of rustic that cannot be staged in a ballroom, because none of it is staged.</p>
+    </div>
+  </div>
+
+  <div class="wrow flip reveal">
+    <div class="wimg"><div class="ph" style="background-image:url('img/wedding-centerpieces-01.jpg')" role="img" aria-label="Reception tables with peach roses and antler centerpieces"></div></div>
+    <div class="wtxt">
+      <div class="mono k">04 — The Evening</div>
+      <h2>Dinner and dancing <em>under cover.</em></h2>
+      <p>A 2,200-square-foot covered patio holds the reception — room for dinner, dancing, and the long toasts that follow.</p>
+      <p>At one Red Bank wedding the sign read: &ldquo;Come as you are. Stay as long as you can. We&rsquo;re all family, so no seating plan.&rdquo; That is the spirit of the place.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="wmosaic reveal">
+  <div class="m" style="background-image:url('img/wedding-overlook-01.jpg')" role="img" aria-label="The ranch and pavilion from the overlook"></div>
+  <div class="m" style="background-image:url('img/wedding-wedding-cake-01.jpg')" role="img" aria-label="The wedding cake"></div>
+  <div class="m" style="background-image:url('img/wedding-pick-a-seat-01.jpg')" role="img" aria-label="Pick a seat, not a side"></div>
+  <div class="m" style="background-image:url('img/wedding-suits-hanging-01.jpg')" role="img" aria-label="The groomsmen's suits"></div>
+  <div class="m" style="background-image:url('img/wedding-hamptonwed-2953.jpg')" role="img" aria-label="A Red Bank wedding"></div>
+  <div class="m" style="background-image:url('img/wedding-ale-quail-front-gate-01.jpg')" role="img" aria-label="The front gate dressed for a wedding"></div>
+</div>
+
+{related_html(0, [
+ ("dining.html","dining.jpg","The <em>kitchen</em>","The same household staff."),
+ ("lodge.html","lodge.jpg","The <em>Lodge</em>","Bridal party rooms."),
+ ("contact.html","ranch-gate.jpg","See it","Six miles from town.")])}
+
+<section class="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <h2 class="reveal">See it <em>for yourself.</em></h2>
+    <div class="cta-side reveal">
+      <p>Tours are by appointment. Contact us for available dates and pricing — and walk the patio, the meadow, and the bluffs before you decide a thing.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn-primary" href="contact.html">Schedule a Tour</a>
+        <a class="btn-ghost" href="{TEL}">{PHONE}</a>
+      </div>
+    </div>
+  </div>
+</section>
+'''
+add("weddings.html", wrap(0, "Weddings — Red Bank Outfitters",
+"Northern California outdoor ranch wedding venue on Red Bank Creek, Red Bluff. Red bluff backdrop, 2,200 sq ft covered patio, 1,800 sq ft lodge. Tours by appointment.",
+WEDDINGS_BODY, active="stay"))
+
+RATES_BODY = f'''
+<header class="hero">
+  <div class="hero-media" style="background-image:url('img/flythrough-poster.jpg')"></div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <span class="dash"></span>
+      <span class="mono">Rates · Red Bluff, California</span>
+    </div>
+    <h1>Rates &amp; Packages</h1>
+    <p class="hero-sub">
+      Every hunt at Red Bank is built around your party, so we quote rates personally.
+      Reach out for current hunt and lodging pricing — we are happy to help you plan the trip.
+      Blacktail hunts are three days, all inclusive: guide, lodging, meals, and field dressing.
+    </p>
+    <div class="hero-foot">
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="{TEL}">Call Us at {PHONE}</a>
+        <a class="btn-ghost" href="contact.html">Book a Hunt</a>
+      </div>
+    </div>
+  </div>
+</header>
+'''
+add("rates.html", wrap(0, "Rates & Packages — Red Bank Outfitters",
+"Contact Red Bank Outfitters at (530) 529-9435 for reservations and current hunt and lodging rates. Blacktail hunts are 3-day all-inclusive.",
+RATES_BODY, active="big", inner=False))
 
 CONTACT_BODY = f'''
 <header class="page-hero">
   <div class="ph-bg" style="background-image:url('img/ranch-hills.jpg')" role="img" aria-label="Ranch hills west of Red Bluff"></div>
   <div class="page-hero-inner">
     {crumbs([("Home","index.html"),("Contact","")])}
-    <h1>Inquire of the <em>lodge.</em></h1>
-    <p class="lead">Reservations by telephone. For a hunt, a table, the bunkhouse, or a wedding date, call {PHONE}.</p>
+    <h1>Contact</h1>
+    <p class="lead">Contact us for reservations and pricing — a hunt, a table, the bunkhouse, or a wedding date. Call {PHONE} or send us a message.</p>
     <div class="ph-meta">
       <div><div class="k">Phone</div><div class="v">{PHONE}</div></div>
       <div><div class="k">Fax</div><div class="v">(530) 529-9627</div></div>
@@ -850,12 +1056,12 @@ CONTACT_BODY = f'''
     <b>From I-5</b>
     Take exit 647. Head west on Luther. Turn left on Paskenta, right on Live Oak. Live Oak becomes Red Bank. The ranch is on the left, six miles from town.
     <b>Hours</b>
-    Hunts and lodging by reservation. Call the lodge.
+    Hunts and lodging by reservation. Contact us for reservations and pricing.
   </div>
 </div>
 '''
 add("contact.html", wrap(0, "Contact — Red Bank Outfitters",
-"Call (530) 529-9435. 18875 Red Bank Rd, Red Bluff CA 96080. I-5 exit 647, six miles from town.",
+"Contact Red Bank Outfitters — (530) 529-9435. 18875 Red Bank Rd, Red Bluff CA 96080. I-5 exit 647, six miles from town.",
 CONTACT_BODY, active="stay"))
 
 add("gallery.html", wrap(0, "Gallery — Red Bank Outfitters",
@@ -865,10 +1071,16 @@ f'''
   <div class="ph-bg" style="background-image:url('img/clays-water.jpg')"></div>
   <div class="page-hero-inner">
     {crumbs([("Home","index.html"),("Gallery","")])}
-    <h1>The ranch, <em>as it is.</em></h1>
+    <h1>Gallery</h1>
     <p class="lead">Photographs from their own gallery and lodge. Landscape frames of oak and creek are labeled where they are generated scenery, not a hunt.</p>
   </div>
 </header>
+<div style="max-width:1440px;margin:0 auto;padding:48px 40px 8px">
+  <div class="mono" style="color:var(--brass);font-size:10px;letter-spacing:0.24em;text-transform:uppercase;margin-bottom:14px">The Film</div>
+  <div style="position:relative;aspect-ratio:16/9;background:var(--forest)">
+    <iframe src="https://www.youtube-nocookie.com/embed/NSwut20idpI" title="The Red Bank Outfitters film" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</div>
 <div class="gallery-grid" style="padding-top:40px">
   <figure><img src="img/lodge.jpg" alt="Lodge living room"><figcaption>Lodge — their photograph</figcaption></figure>
   <figure><img src="img/bunkhouse-porch.jpg" alt="Bunkhouse porch"><figcaption>Bunkhouse porch</figcaption></figure>
@@ -891,9 +1103,9 @@ add("news.html", page(0, "News — Red Bank Outfitters",
 "Ranch newsletters and dispatches from Red Bank Outfitters, Red Bluff.",
 "stay",
 [("Home","index.html"),("News","")],
-"Around the <em>ranch.</em>",
-"The public archive on the old site runs 2018–2020. For this season, call the lodge.",
-[("Archive","2018–2020"),("Now","Call")],
+"News",
+"The public archive runs 2018–2020. For this season's dates and news, get in touch.",
+[("Archive","2018–2020"),("Now","Inquire")],
 "ranch-gate.jpg", "A timber ranch gate on a golden hillside at dusk",
 '''<p class="deck">Their published newsletters are still on the old WordPress. We are not inventing new ranch news.</p>
 <ul>
@@ -902,7 +1114,7 @@ add("news.html", page(0, "News — Red Bank Outfitters",
 <li>November 2018 — Around the Ranch newsletter</li>
 <li>March 2018 — Upland bird hunting in full swing at Red Bank</li>
 </ul>
-<p>For current bird numbers, hog activity, and open weekends, call {phone}.</p>'''.format(phone=PHONE),
+<p>For current bird numbers, hog activity, and open weekends, contact us at {phone}.</p>'''.format(phone=PHONE),
 [],
 DEFAULT_REL, generated=True))
 
@@ -911,7 +1123,7 @@ add("upland/bobwhite.html", page(1, "Southern-Style Bob White Quail — Red Bank
 "Southern-style bobwhite quail hunts at Red Bank Outfitters. Two guests, one guide, 3–4 dogs. Groups not mixed.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Bobwhite","")],
-"Bobwhite. <em>Southern style.</em>",
+"Southern-Style Bob White Quail",
 "Men and dogs on field edges and flats of head-height brush. Two guests, one guide, three or four dogs.",
 [("Party","2 + guide"),("Dogs","3–4"),("Groups","Not mixed")],
 "dogs-water.jpg", "Pointers working cover",
@@ -925,7 +1137,7 @@ add("upland/valley-quail.html", page(1, "Valley Quail — Red Bank Outfitters",
 "Wild valley quail hunted Texas-style, October through January, on 5,000 acres north of Red Bank. Groups of up to four.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Valley quail","")],
-"Wild valley quail. <em>Texas-style.</em>",
+"Valley Quail",
 "A short California season, October through January. Demand is high. Groups of up to four, out of utility vehicles, on 5,000 acres just north of the ranch.",
 [("Season","Oct–Jan"),("Acres","5,000"),("Party","Up to 4")],
 "ranch-hills.jpg", "Open ranch hills in Tehama County",
@@ -938,7 +1150,7 @@ add("upland/mountain-quail.html", page(1, "Mountain Quail — Red Bank Outfitter
 "Mountain quail hunts a 30-minute drive from Red Bank Outfitters. Chaparral birds, more often heard than seen.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Mountain quail","")],
-"Mountain quail. <em>More heard than seen.</em>",
+"Mountain Quail",
 "A 30-minute drive from the ranch into mountainous chaparral. Listen at daylight. They run the brush; flights are short and explosive.",
 [("Drive","30 min"),("Cover","Chaparral"),("Flight","Short")],
 "creek.jpg", "Steep country west of Red Bluff",
@@ -951,20 +1163,20 @@ add("upland/chukar.html", page(1, "Chukar — Red Bank Outfitters",
 "Chukar partridge hunts at Red Bank Outfitters. Running birds on steep banks.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Chukar","")],
-"Chukar. <em>They run uphill.</em>",
+"Chukar",
 "A unique challenge: innate running ability, steep banks, a short flush, then a footrace.",
 [("Flush","Short"),("Then","They run"),("Ground","Steep")],
 "ranch-hills.jpg", "Steep ranch ground",
 '''<p class="deck">Chukar partridge run. They climb a steep bank, flush a short distance, and try the quick-footed escape. That is the hunt.</p>
-<p>Stack it with bobwhite or pheasant in the same trip. Call the lodge for how they are putting parties together this week.</p>''',
-[("Short","Flush"),("Steep","Banks"),("Call","For dates")],
+<p>Stack it with bobwhite or pheasant in the same trip. Contact us and we will put the right day together.</p>''',
+[("Short","Flush"),("Steep","Banks"),("Contact","For dates")],
 DEFAULT_REL))
 
 add("upland/pheasant.html", page(1, "Walk-Up Pheasant — Red Bank Outfitters",
 "Walk-up ring-necked pheasant hunts at Red Bank Outfitters. Minimum two shooters. Lean fliers that make multiple flights.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Pheasant","")],
-"Walk-up pheasant. <em>Minimum two guns.</em>",
+"Walk-Up Pheasant",
 "Ring-necked pheasants that burst cover and make multiple flights. Their squawks startle a field. Two shooters minimum.",
 [("Min","2 shooters"),("Bird","Ring-neck"),("Style","Walk-up")],
 "pheasant.jpg", "Pheasant hunt photograph from Red Bank",
@@ -977,7 +1189,7 @@ add("upland/european-drive.html", page(1, "European-Style Drive — Red Bank Out
 "European-style driven pheasant at Red Bank Outfitters. 4 to 12 shooters, pegs, beaters, pickers-up. At least 100 birds.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Drive","")],
-"A drive. <em>Pegs and beaters.</em>",
+"European-Style Drive",
 "Four to twelve guns. Beaters push pheasants. Pickers-up work behind. After each push, rotate. At least 100 birds released.",
 [("Guns","4–12"),("Birds","100+"),("Style","Driven")],
 "driven.jpg", "Driven pheasant at Red Bank",
@@ -991,7 +1203,7 @@ add("upland/turkey.html", page(1, "Wild Turkey — Red Bank Outfitters",
 "Rio Grande wild turkey hunts at Red Bank Outfitters. Fall: tom or hen. Spring: bearded gobblers only. California seasons.",
 "upland",
 [("Home","../index.html"),("Upland","../upland.html"),("Turkey","")],
-"Rio Grande turkey. <em>Two seasons.</em>",
+"Wild Turkey",
 "A California wildlife-management success story. Fall: tom or hen. Spring: gobblers with visible beards only. Guides will teach you to call.",
 [("Fall","Tom or hen"),("Spring","Bearded toms"),("Regs","CA F&W")],
 "guests.jpg", "A hunting party on the ranch",
@@ -1005,7 +1217,7 @@ add("hunts/blacktail.html", page(1, "Blacktail Deer Hunts — Red Bank Outfitter
 "Columbia blacktail deer hunts at Red Bank Outfitters. 10,000+ acres, 6–10 bucks a day, 3-day all-inclusive: guide, lodging, meals, field dressing.",
 "big",
 [("Home","../index.html"),("Big Game","../big-game.html"),("Blacktail","")],
-"Columbia blacktail. <em>Three days.</em>",
+"Blacktail Deer",
 "More than 10,000 acres of managed habitat. A healthy buck-to-doe ratio. Average 6 to 10 bucks a day. Guide, lodging, meals, field dressing included.",
 [("Acres","10,000+"),("Days","3"),("Bucks / day","6–10")],
 "deer.jpg", "A blacktail buck taken at Red Bank",
@@ -1021,7 +1233,7 @@ add("hunts/wild-hog.html", page(1, "Wild Hog — Red Bank Outfitters",
 "Wild hog hunts on 18,000 acres at Red Bank Outfitters. Oaks, manzanita, poison oak draws, eucalyptus grove. UTV or on foot.",
 "big",
 [("Home","../index.html"),("Big Game","../big-game.html"),("Wild hog","")],
-"Hog wild. <em>Red Bank style.</em>",
+"Wild Hog",
 "European wild boar, feral hogs, and crosses. Eighteen thousand acres from open oak hills to manzanita bedding cover.",
 [("Acres","18,000"),("Method","UTV or foot"),("Grove","Eucalyptus option")],
 "hog.jpg", "A wild hog taken at Red Bank Outfitters",

@@ -495,7 +495,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       '</div>' +
       '<form class="chat-form"><input type="text" autocomplete="off" placeholder="Ask about the ranch…" ' +
       'aria-label="Ask about the ranch"><button type="submit">Send</button></form>' +
-      '<div class="chat-foot">Scripted concierge · answers from this site only · call ' + PHONE + '</div>';
+      '<div class="chat-actions">' +
+        '<a class="ca" href="tel:' + TEL + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call ' + PHONE + '</a>' +
+        '<a class="ca" href="' + href('contact.html') + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Contact form</a>' +
+      '</div>' +
+      '<div class="chat-foot"><strong>Lasso</strong> · Powered by AI Wrangler</div>';
 
     document.body.appendChild(fab);
     document.body.appendChild(panel);
@@ -605,4 +609,63 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     });
   })();
 
+})();
+
+/* ---------- Cookie consent (mirrors the C2 pattern: privacy-first, GPC-aware) ---------- */
+(function () {
+  var STORAGE_KEY = 'rbo-consent';
+  var banner = document.getElementById('consent-banner');
+  if (!banner) return;
+
+  function readChoice() {
+    try { return localStorage.getItem(STORAGE_KEY); } catch (_) { return null; }
+  }
+  function writeChoice(value) {
+    try { localStorage.setItem(STORAGE_KEY, value); } catch (_) {}
+    window.__rboConsent = value;
+    window.dispatchEvent(new CustomEvent('rbo:consent', { detail: { choice: value } }));
+  }
+  function show() { banner.classList.remove('hidden'); }
+  function hide() { banner.classList.add('hidden'); }
+
+  /* Global Privacy Control counts as a standing reject; the visitor can override. */
+  var gpc = (navigator.globalPrivacyControl === true);
+  var initial = readChoice();
+  window.__rboConsent = initial || (gpc ? 'rejected' : null);
+
+  if (!initial) { setTimeout(show, 600); }
+
+  banner.querySelector('[data-consent-accept]').addEventListener('click', function () {
+    writeChoice('accepted'); hide();
+  });
+  banner.querySelector('[data-consent-reject]').addEventListener('click', function () {
+    writeChoice('rejected'); hide();
+  });
+
+  document.querySelectorAll('[data-open-consent]').forEach(function (el) {
+    el.addEventListener('click', function (e) { e.preventDefault(); show(); });
+  });
+})();
+
+/* ---------- Floating mobile menu bar (Tehama pattern) ---------- */
+(function () {
+  if (document.getElementById('rbMobileBar')) return;
+  var ROOT = document.body.getAttribute('data-root') || '';
+  function href(p) { return ROOT + p; }
+  var S = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
+  var bar = document.createElement('nav');
+  bar.id = 'rbMobileBar';
+  bar.className = 'mob-bar';
+  bar.setAttribute('aria-label', 'Quick navigation');
+  bar.innerHTML =
+    '<a href="' + href('index.html') + '"><svg viewBox="0 0 24 24" ' + S + '><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg><span>Home</span></a>' +
+    '<a href="' + href('hunts.html') + '"><svg viewBox="0 0 24 24" ' + S + '><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span>Hunts</span></a>' +
+    '<a class="mb-center" href="' + href('contact.html') + '"><span class="circ"><svg viewBox="0 0 24 24" ' + S + '><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span>Book</span></a>' +
+    '<a href="' + href('lodge.html') + '"><svg viewBox="0 0 24 24" ' + S + '><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M2 17h20"/></svg><span>Lodge</span></a>' +
+    '<button type="button" data-mob-chat><svg viewBox="0 0 24 24" ' + S + '><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>Chat</span></button>';
+  document.body.appendChild(bar);
+  bar.querySelector('[data-mob-chat]').addEventListener('click', function () {
+    var fab = document.querySelector('.chat-fab');
+    if (fab) fab.click();
+  });
 })();

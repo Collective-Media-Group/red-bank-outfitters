@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Contact — Red Bank Outfitters</title>
-<meta name="description" content="Call (530) 529-9435. 18875 Red Bank Rd, Red Bluff CA 96080. I-5 exit 647, six miles from town.">
+<meta name="description" content="Contact Red Bank Outfitters — (530) 529-9435. 18875 Red Bank Rd, Red Bluff CA 96080. I-5 exit 647, six miles from town.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -18,6 +18,13 @@
 </head>
 <body class="inner" data-root="">
 
+<div class="announce" id="announce">
+  <div class="announce-inner">
+    <span class="announce-text">Now accepting reservations for the 26–27 season and lodge accommodations.</span>
+    <a class="announce-cta" href="lodge.html">Reserve dates</a>
+    <button class="announce-close" id="announceClose" aria-label="Dismiss announcement">&times;</button>
+  </div>
+</div>
 
 <nav class="nav" id="nav">
   <div class="nav-inner">
@@ -65,7 +72,7 @@
       </div>
     </div>
     <div class="nav-right">
-      <a class="book-btn" href="contact.html">Inquire</a>
+      <a class="book-btn" href="contact.html">Book a Hunt</a>
       <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-controls="drawer" aria-expanded="false">
         <span class="menu-btn-lines" aria-hidden="true"><span></span><span></span><span></span></span>
         <span class="menu-btn-label mono">Menu</span>
@@ -102,9 +109,8 @@
     </nav>
     <nav class="drawer-col" aria-label="Media">
       <h4 class="mono">Media</h4>
-      <a href="gallery.html">Photo Gallery</a>
+      <a href="gallery.html">Gallery</a>
       <a href="news.html">News</a>
-      <a href="https://www.youtube.com/watch?v=NSwut20idpI" target="_blank" rel="noopener">The Film <span class="ext">↗</span></a>
     </nav>
     <nav class="drawer-col" aria-label="Academy">
       <h4 class="mono">Academy</h4>
@@ -123,8 +129,8 @@
   <div class="ph-bg" style="background-image:url('img/ranch-hills.jpg')" role="img" aria-label="Ranch hills west of Red Bluff"></div>
   <div class="page-hero-inner">
     <div class="crumb mono"><a href="index.html">Home</a><span>/</span><span>Contact</span></div>
-    <h1>Inquire of the <em>lodge.</em></h1>
-    <p class="lead">Reservations by telephone. For a hunt, a table, the bunkhouse, or a wedding date, call (530) 529-9435.</p>
+    <h1>Contact</h1>
+    <p class="lead">Contact us for reservations and pricing — a hunt, a table, the bunkhouse, or a wedding date. Call (530) 529-9435 or send us a message.</p>
     <div class="ph-meta">
       <div><div class="k">Phone</div><div class="v">(530) 529-9435</div></div>
       <div><div class="k">Fax</div><div class="v">(530) 529-9627</div></div>
@@ -158,7 +164,7 @@
     <b>From I-5</b>
     Take exit 647. Head west on Luther. Turn left on Paskenta, right on Live Oak. Live Oak becomes Red Bank. The ranch is on the left, six miles from town.
     <b>Hours</b>
-    Hunts and lodging by reservation. Call the lodge.
+    Hunts and lodging by reservation. Contact us for reservations and pricing.
   </div>
 </div>
 
@@ -196,7 +202,7 @@
     <div class="foot-bot">
       <span>&copy; Red Bank Outfitters · Est. 1965</span>
       <span class="mono">Red Bluff, California · 18,000 ac</span>
-      <span>The 1965 Society · By arrangement</span>
+      <a href="#" data-open-consent>Privacy Choices</a>
       
     </div>
   </div>
@@ -210,13 +216,28 @@
   <button class="bb-close" id="bbClose" type="button" aria-label="Dismiss">&times;</button>
 </div>
 
+<aside id="consent-banner" class="consent hidden" role="dialog" aria-modal="false" aria-labelledby="consent-title">
+  <div class="consent-card">
+    <div class="consent-copy">
+      <div class="mono consent-kicker">Privacy Choices</div>
+      <h2 id="consent-title">Website tracking and privacy choices</h2>
+      <p>We use cookies and similar technologies on this website. Some are necessary to operate and secure the site. Others are optional and are used only with your consent — they may collect information such as your IP address, device and browser details, pages visited, and interactions, which may be shared with analytics and marketing providers. Under California law this may be considered a &ldquo;sale&rdquo; or &ldquo;sharing&rdquo; of personal information, even though we do not sell personal information for money.</p>
+      <p>You may reject optional technologies or change your choice at any time via <strong>Privacy Choices</strong> in the footer. We honor Global Privacy Control signals where required by law.</p>
+    </div>
+    <div class="consent-actions">
+      <button type="button" data-consent-accept class="btn-primary">Accept all</button>
+      <button type="button" data-consent-reject class="btn-ghost">Reject optional</button>
+    </div>
+  </div>
+</aside>
+
 <div class="news-backdrop" id="newsBackdrop" hidden></div>
 <div class="news-modal" id="newsModal" role="dialog" aria-modal="true" aria-labelledby="newsTitle" aria-hidden="true" hidden>
   <button class="news-close" id="newsClose" type="button" aria-label="Close">&times;</button>
   <div class="news-grid">
     <aside class="news-media" aria-hidden="true">
       <div class="news-media-ph"></div>
-      <div class="news-badge mono">Call the Lodge</div>
+      <div class="news-badge mono">Contact Us</div>
       <div class="news-media-cap mono">Season dates by phone</div>
     </aside>
     <div class="news-body">
@@ -231,12 +252,12 @@
         <div class="news-field"><label for="newsPhone">Mobile number</label><input type="tel" id="newsPhone" name="phone" autocomplete="tel" inputmode="tel" required></div>
         <label class="news-opt"><input type="checkbox" id="newsSms" name="sms" checked><span>Text me season openers. Msg &amp; data rates may apply. Reply STOP to unsubscribe.</span></label>
         <button type="submit" class="news-submit">Join the list</button>
-        <p class="news-fine mono">We never share your info. For a hunt, call (530) 529-9435.</p>
+        <p class="news-fine mono">We never share your info. For reservations and pricing, contact us at (530) 529-9435.</p>
       </form>
       <div class="news-thanks" id="newsThanks" hidden>
         <div class="mono news-eyebrow" style="color:var(--brass)">— Confirmed</div>
         <h3>Thank you.</h3>
-        <p>If you need dates this week, call the lodge at (530) 529-9435.</p>
+        <p>Need dates this week? Contact us at (530) 529-9435 and we will make it work.</p>
       </div>
     </div>
   </div>
