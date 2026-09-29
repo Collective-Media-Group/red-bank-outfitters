@@ -3,7 +3,29 @@
   publish = "."
   command = ""
 
-# Long-lived binaries. Filenames change when the asset changes.
+# img/src holds the raw WordPress originals. It is gitignored, but a deploy
+# from a local folder uploads it anyway, and with robots.txt now open those
+# low-res originals would be crawlable. Block them.
+[[redirects]]
+  from = "/img/src/*"
+  to = "/404"
+  status = 404
+  force = true
+
+# The generator is not part of the site.
+[[redirects]]
+  from = "/build.py"
+  to = "/404"
+  status = 404
+  force = true
+
+# Belt and braces, in case a path is reached some other way.
+[[headers]]
+  for = "/img/src/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Long-lived binaries.
 [[headers]]
   for = "/video/*"
   [headers.values]
