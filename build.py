@@ -1071,7 +1071,7 @@ POSTCARD_BODY = f'''
 
   <div class="mono pc-side-label">Text message — copy &amp; send from your contacts</div>
   <div class="pc-sms">
-    <p class="pc-bubble" id="pcSmsText">hey, it's brian out at red bank. the new lodge is finally open and we're booking the 26–27 season now. space is limited, take a look: https://red-bank-outfitters.netlify.app/lodge.html — call or text me if you want to book a hunt</p>
+    <p class="pc-bubble" id="pcSmsText">hey, it's brian out at red bank. the new lodge opens this fall and we're already booking the 26–27 season. space is limited, take a look: https://red-bank-outfitters.netlify.app/lodge.html — call or text me if you want to book a hunt</p>
     <button class="btn-primary" type="button" id="pcCopyBtn">Copy message</button>
   </div>
 </div>
