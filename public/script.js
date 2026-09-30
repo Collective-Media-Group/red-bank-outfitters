@@ -429,7 +429,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       { k: ['dog','kennel','pointer','retriev'],
         a: 'The ranch keeps its own dogs and <a href="' + href('kennels') + '">kennels</a> on site, so you do not need to bring one.' },
       { k: ['lodge','sleep','stay','room','accommodat','bed','bunk'],
-        a: 'The <a href="' + href('lodge') + '">lodge</a> sleeps fourteen with three showers and a full kitchen; the <a href="' + href('bunkhouse') + '">bunkhouse</a> sleeps six. Groups are never mixed — the house is yours.' },
+        a: 'The <a href="' + href('lodge') + '">lodge</a> is 6,500 square feet and sleeps 8 to 16 — every bedroom has a private en-suite bath; the <a href="' + href('bunkhouse') + '">bunkhouse</a> sleeps six. Groups are never mixed — the house is yours.' },
       { k: ['eat','food','meal','dining','dinner','cook','chef','breakfast'],
         a: 'Meals are served in the lodge — see <a href="' + href('dining') + '">dining</a>.' },
       { k: ['wedding','event','venue','marry','reception'],
