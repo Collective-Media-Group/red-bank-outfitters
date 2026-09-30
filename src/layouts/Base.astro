@@ -34,6 +34,9 @@ const ld = JSON.stringify({
 const markerJs = "window.markerConfig = { project: '6a9080636ccdf9c4f8369305', source: 'snippet' };\n!function(e,r,a){if(!e.__Marker){e.__Marker={};var t=[],n={__cs:t};[\"show\",\"hide\",\"isVisible\",\"capture\",\"cancelCapture\",\"unload\",\"reload\",\"isExtensionInstalled\",\"setReporter\",\"clearReporter\",\"setCustomData\",\"on\",\"off\"].forEach(function(e){n[e]=function(){var r=Array.prototype.slice.call(arguments);r.unshift(e),t.push(r)}}),e.Marker=n;var s=r.createElement(\"script\");s.async=1,s.src=\"https://edge.marker.io/latest/shim.js\";var i=r.getElementsByTagName(\"script\")[0];i.parentNode.insertBefore(s,i)}}(window,document);";
 
 const cur = (key: string) => (active === key ? "page" : undefined);
+
+// Build stamp so styles/script updates bypass the 1-hour browser cache
+const v = Date.now().toString(36);
 ---
 <html lang="en">
 <head>
@@ -45,7 +48,7 @@ const cur = (key: string) => (active === key ? "page" : undefined);
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="/img/mark.svg" type="image/svg+xml" />
-<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href={"/styles.css?v=" + v} />
 <script type="application/ld+json" is:inline set:html={ld} />
 <link rel="canonical" href={canonical} />
 <meta property="og:type" content="website" />
@@ -264,7 +267,7 @@ const cur = (key: string) => (active === key ? "page" : undefined);
   </div>
 </div>
 
-<script src="/script.js" is:inline></script>
+<script src={"/script.js?v=" + v} is:inline></script>
 <!-- Marker.io feedback widget (preview only) -->
 <script is:inline set:html={markerJs} />
 </body>

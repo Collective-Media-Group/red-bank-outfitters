@@ -1655,3 +1655,6 @@ a.about-img:hover .cap .mono{color:var(--brass)}
   .em-body{padding:22px 16px 6px}
   .em-facts{gap:14px;flex-wrap:wrap}
 }
+
+/* Press logos: settle the size */
+.marquee .seenin-logo img{height:36px}
