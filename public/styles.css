@@ -1626,3 +1626,7 @@ a.about-img:hover .cap .mono{color:var(--brass)}
   border:1px solid rgba(11,10,8,.2);box-shadow:0 4px 14px rgba(11,10,8,.12);
 }
 .pc-snaps .snap-wide{aspect-ratio:16/8}
+
+/* Press logos: smaller, consistent */
+.marquee .seenin-logo{min-width:0;padding:0 6px}
+.marquee .seenin-logo img{height:26px;width:auto;opacity:.9}
