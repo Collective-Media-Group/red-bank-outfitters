@@ -1596,3 +1596,11 @@ a.about-img:hover .cap .mono{color:var(--brass)}
 
 /* Hunt cards: no hover motion */
 .hunt-card:hover .bg{transform:none}
+
+/* Rotating photo block (lodge intro) */
+.img-fade .ph{opacity:0;transition:opacity 1.4s ease}
+.img-fade .ph.on{opacity:1}
+.img-fade .cap{z-index:1}
+
+/* Sub-line under section headings */
+.sec-head .sec-sub{margin-top:16px;font-size:16px;font-weight:500;line-height:1.65;color:#3a3f32;max-width:72ch}

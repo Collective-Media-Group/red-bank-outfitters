@@ -675,8 +675,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 (function () {
   var mobile = window.matchMedia('(max-width: 900px)').matches;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.parallax-fade').forEach(function (wrap) {
-    var layers = wrap.querySelectorAll('.pf');
+  document.querySelectorAll('.parallax-fade, .img-fade').forEach(function (wrap) {
+    var layers = wrap.querySelectorAll('.pf, .ph');
     if (!layers.length) return;
     layers[0].classList.add('on');
     if (layers.length < 2 || reduced) return;
