@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+const body = "\n<header class=\"hero\">\n  <div class=\"hero-media\" style=\"background-image:url('/img/flythrough-poster.jpg')\"></div>\n  <div class=\"hero-grain\" aria-hidden=\"true\"></div>\n  <div class=\"hero-inner\">\n    <div class=\"hero-eyebrow\">\n      <span class=\"dash\"></span>\n      <span class=\"mono\">Request Information</span>\n    </div>\n    <h1>Rates &amp; Packages</h1>\n    <p class=\"hero-sub\">\n      Every hunt at Red Bank is built around your party, so we quote rates personally.\n      Reach out for current hunt and lodging pricing \u2014 we are happy to help you plan the trip.\n      Blacktail hunts are three days, all inclusive: guide, lodging, meals, and field dressing.\n    </p>\n    <div class=\"hero-foot\">\n      <div class=\"hero-cta-row\">\n        <a class=\"btn-primary\" href=\"tel:+15305299435\">Call Us at (530) 529-9435</a>\n        <a class=\"btn-ghost\" href=\"/contact\">Book a Hunt</a>\n      </div>\n    </div>\n  </div>\n</header>\n";
+---
+<Base title="Rates & Packages \u2014 Red Bank Outfitters" description="Contact Red Bank Outfitters at (530) 529-9435 for reservations and current hunt and lodging rates. Blacktail hunts are 3-day all-inclusive." active="big" inner={false}>
+  <Fragment set:html={body} />
+</Base>

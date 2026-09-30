@@ -1,0 +1,95 @@
+# Legacy redbankhunting.com (WordPress) URLs -> new site pages.
+# 301s preserve search equity when the domain cuts over to this site.
+# Netlify matches with or without the trailing slash. First match wins,
+# so specific post rules sit above the dated splats.
+
+# Hub pages
+/weddings/*                                   /weddings               301
+/services                                     /hunts                  301
+
+# Upland game
+/upland-game                                  /upland                 301
+/upland-game/southern-style-bob-white-quail   /upland/bobwhite        301
+/upland-game/valley-quail                     /upland/valley-quail    301
+/upland-game/mountain-quail                   /upland/mountain-quail  301
+/upland-game/chukar                           /upland/chukar          301
+/upland-game/walk-up-pheasant-hunts           /upland/pheasant        301
+/upland-game/european-style-drive             /upland/european-drive  301
+/upland-game/wild-turkey                      /upland/turkey          301
+/ring-necked-pheasant                         /upland/pheasant        301
+
+# Big game
+/big-game/trophy-deer-hunts                   /hunts/blacktail        301
+/big-game/wild-hog                            /hunts/wild-hog         301
+/hogs                                         /hunts/wild-hog         301
+
+# Clays and fishing
+/sporting-clays                               /clays                  301
+/services/sporting-clays                      /clays                  301
+/bass-fishing                                 /bass                   301
+/services/bass-fishing                        /bass                   301
+/fishing                                      /bass                   301
+/fishing-2                                    /bass                   301
+
+# Accommodations
+/accommodations                               /lodge                  301
+/accommodations/lodge                         /lodge                  301
+/accommodations/dining                        /dining                 301
+/accommodations/bunkhouse-2                   /bunkhouse              301
+/kennels-2                                    /kennels                301
+
+# Media
+/media                                        /gallery                301
+/media/photo-gallery                          /gallery                301
+/media/videos                                 /gallery                301
+
+# Testimonials (no dedicated page on the new site yet)
+/hunter-testimonials                          /the-ranch              301
+/bill-c                                       /the-ranch              301
+/roger-j-sabette                              /the-ranch              301
+/guest                                        /the-ranch              301
+/guest-2                                      /the-ranch              301
+
+# News, newsletter, blog categories
+/newsletter                                   /news                   301
+/category/*                                   /news                   301
+/feed                                         /news                   301
+
+# Individual posts mapped to their closest living page
+/2012/01/15/meiwinkel-hog-hunt                /hunts/wild-hog         301
+/2012/01/27/big-boar-taken-with-archery       /hunts/wild-hog         301
+/2018/03/06/upland-bird-hunting-in-full-swing-at-red-bank  /upland    301
+
+# Every other dated post and archive page -> news
+/2012/*                                       /news                   301
+/2016/*                                       /news                   301
+/2018/*                                       /news                   301
+/2020/*                                       /news                   301
+
+# The old .html URLs 301 to the clean paths (Astro routes).
+/index.html                                   /                            301
+/the-ranch.html                               /the-ranch                   301
+/hunts.html                                   /hunts                       301
+/upland.html                                  /upland                      301
+/big-game.html                                /big-game                    301
+/bass.html                                    /bass                        301
+/clays.html                                   /clays                       301
+/kennels.html                                 /kennels                     301
+/lodge.html                                   /lodge                       301
+/bunkhouse.html                               /bunkhouse                   301
+/dining.html                                  /dining                      301
+/weddings.html                                /weddings                    301
+/rates.html                                   /rates                       301
+/contact.html                                 /contact                     301
+/gallery.html                                 /gallery                     301
+/news.html                                    /news                        301
+/postcard.html                                /postcard                    301
+/upland/bobwhite.html                         /upland/bobwhite             301
+/upland/valley-quail.html                     /upland/valley-quail         301
+/upland/mountain-quail.html                   /upland/mountain-quail       301
+/upland/chukar.html                           /upland/chukar               301
+/upland/pheasant.html                         /upland/pheasant             301
+/upland/european-drive.html                   /upland/european-drive       301
+/upland/turkey.html                           /upland/turkey               301
+/hunts/blacktail.html                         /hunts/blacktail             301
+/hunts/wild-hog.html                          /hunts/wild-hog              301

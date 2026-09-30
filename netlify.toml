@@ -1,29 +1,7 @@
-# Static site: no build step, the repo root is the published site.
+# Astro static build; redirects live in public/_redirects.
 [build]
-  publish = "."
-  command = ""
-
-# img/src holds the raw WordPress originals. It is gitignored, but a deploy
-# from a local folder uploads it anyway, and with robots.txt now open those
-# low-res originals would be crawlable. Block them.
-[[redirects]]
-  from = "/img/src/*"
-  to = "/404"
-  status = 404
-  force = true
-
-# The generator is not part of the site.
-[[redirects]]
-  from = "/build.py"
-  to = "/404"
-  status = 404
-  force = true
-
-# Belt and braces, in case a path is reached some other way.
-[[headers]]
-  for = "/img/src/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
+  publish = "dist"
+  command = "npm run build"
 
 # Long-lived binaries.
 [[headers]]
@@ -35,18 +13,3 @@
   for = "/styles.css"
   [headers.values]
     Cache-Control = "public, max-age=3600"
-
-# The ranch OS. It deploys as its own Netlify project (red-bank-ai-os) so its
-# own gated deploy script keeps working, and is proxied in here so the client
-# has one address rather than two.
-[[redirects]]
-  from = "/os"
-  to = "https://red-bank-ai-os.netlify.app"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/os/*"
-  to = "https://red-bank-ai-os.netlify.app/:splat"
-  status = 200
-  force = true

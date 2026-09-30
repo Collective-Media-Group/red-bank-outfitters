@@ -1,4 +1,8 @@
 .DS_Store
-img/src/
+raw/
 *.pyc
 __pycache__/
+node_modules/
+dist/
+.astro/
+.netlify/
