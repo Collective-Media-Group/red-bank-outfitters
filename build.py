@@ -368,7 +368,7 @@ f'''
     <div class="hero-foot">
       <div class="hero-cta-row">
         <a class="btn-primary" href="contact.html">Book a Hunt</a>
-        <a class="btn-ghost" href="https://www.youtube.com/watch?v=NSwut20idpI" target="_blank" rel="noopener">Explore the Ranch</a>
+        <a class="btn-ghost" href="#ranch">Explore the Ranch</a>
       </div>
       <div class="hero-meta">
         <div class="cell"><div class="k">Ranch</div><div class="v">18,000 ac</div></div>
@@ -419,10 +419,10 @@ f'''
           <div class="stat"><div class="num" data-counter="11">0</div><div class="lbl mono">Bass ponds</div></div>
         </div>
       </div>
-      <div class="about-img reveal">
-        <div class="ph"></div>
-        <div class="cap"><span class="d"></span><span class="mono">The lodge, west of Red Bluff — rendering</span></div>
-      </div>
+      <a class="about-img reveal" href="lodge.html" aria-label="See the Lodge">
+        <div class="ph" style="background-image:url('img/lodge-landscape.jpg')"></div>
+        <div class="cap"><span class="d"></span><span class="mono">Explore Lodge</span><span class="arr" aria-hidden="true">&rarr;</span></div>
+      </a>
     </div>
   </div>
 </section>
@@ -432,6 +432,12 @@ f'''
     <div class="sec-head reveal">
       <div class="mono label">02 — The Hunt</div>
       <h2>Two guns, one guide, three or four dogs. <em>We do not mix groups.</em></h2>
+    </div>
+    <div class="hunt-ticker marquee">
+      <div class="marquee-track">
+        <div class="marquee-group"><span class="tk">Southern-Style Bobwhite Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Valley Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Mountain Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Chukar</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Walk-Up Pheasant</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">European-Style Drives</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Rio Grande Turkey</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Columbia Blacktail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Wild Hog</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Bass Fishing — Eleven Ponds</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Sporting Clays — Eighteen Stations</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Bird Dogs &amp; Kennels</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">The Lodge</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Dining at the Long Table</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Ranch Weddings</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Corporate Retreats</span><span class="dm" aria-hidden="true">&#9670;</span></div>
+        <div class="marquee-group" aria-hidden="true"><span class="tk">Southern-Style Bobwhite Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Valley Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Mountain Quail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Chukar</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Walk-Up Pheasant</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">European-Style Drives</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Rio Grande Turkey</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Columbia Blacktail</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Wild Hog</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Bass Fishing — Eleven Ponds</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Sporting Clays — Eighteen Stations</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Bird Dogs &amp; Kennels</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">The Lodge</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Dining at the Long Table</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Ranch Weddings</span><span class="dm" aria-hidden="true">&#9670;</span><span class="tk">Corporate Retreats</span><span class="dm" aria-hidden="true">&#9670;</span></div>
+      </div>
     </div>
     <div class="hunt-grid">
       <a class="hunt-card wide tilt" href="upland.html">
@@ -467,41 +473,11 @@ f'''
   </div>
 </section>
 
-<section class="house">
-  <div class="house-inner">
-    <div class="sec-head reveal">
-      <div class="mono label">The house rules</div>
-      <h2>How the ranch has been run <em>since 1965.</em></h2>
-    </div>
-    <div class="house-grid">
-      <div class="house-item">
-        <span class="n mono">01</span>
-        <h3>Private parties</h3>
-        <p>We do not mix groups. The lodge is yours. No minimum party size.</p>
-      </div>
-      <div class="house-item">
-        <span class="n mono">02</span>
-        <h3>Two and a brace</h3>
-        <p>A typical upland party is two guests, one guide, and three or four dogs.</p>
-      </div>
-      <div class="house-item">
-        <span class="n mono">03</span>
-        <h3>The house</h3>
-        <p>The lodge sleeps fourteen. The bunkhouse, six. Kennels at both.</p>
-      </div>
-      <div class="house-item">
-        <span class="n mono">04</span>
-        <h3>Reservations</h3>
-        <p>Contact us for reservations and pricing — we will build the trip around you.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="lodge" id="lodge">
   <div class="sec">
     <div class="sec-head reveal">
-      <div class="mono label">03 — The house</div>
+      <div class="mono label">03 — Accommodations</div>
       <h2>Quiet rooms when the day is done — and a long table <em>worth coming in for.</em></h2>
     </div>
     <div class="rooms">
@@ -1017,46 +993,41 @@ add("rates.html", wrap(0, "Rates & Packages — Red Bank Outfitters",
 RATES_BODY, active="big", inner=False))
 
 CONTACT_BODY = f'''
-<header class="page-hero">
-  <div class="ph-bg" style="background-image:url('img/ranch-hills.jpg')" role="img" aria-label="Ranch hills west of Red Bluff"></div>
-  <div class="page-hero-inner">
-    {crumbs([("Home","index.html"),("Contact","")])}
-    <h1>Contact</h1>
-    <p class="lead">Contact us for reservations and pricing — a hunt, a table, the bunkhouse, or a wedding date. Call {PHONE} or send us a message.</p>
-    <div class="ph-meta">
-      <div><div class="k">Phone</div><div class="v">{PHONE}</div></div>
-      <div><div class="k">Fax</div><div class="v">(530) 529-9627</div></div>
-      <div><div class="k">Gate</div><div class="v">6 miles from town</div></div>
+<div class="invite-page">
+  <div class="invite-card">
+    <img class="invite-mark" src="img/mark.svg" alt="" width="54" height="54">
+    <div class="mono invite-eyebrow">Est. 1965 · Red Bluff, California</div>
+    <h1 class="invite-h1">You are invited<br>to <em>Red Bank</em></h1>
+    <p class="invite-sub">A private hunt, a weekend at the lodge, a table by the fire, or a wedding on the creek. The ranch receives one party at a time — and the next one could be yours.</p>
+    <div class="invite-rule" aria-hidden="true"><span></span><span class="dm">&#9670;</span><span></span></div>
+    <div class="invite-details">
+      <div><span class="k mono">Telephone</span><a class="v" href="{TEL}">{PHONE}</a></div>
+      <div><span class="k mono">Email</span><a class="v" href="mailto:{EMAIL}">{EMAIL}</a></div>
+      <div><span class="k mono">The Gate</span><span class="v">18875 Red Bank Rd, Red Bluff</span></div>
     </div>
-  </div>
-</header>
-<div class="contact-grid">
-  <form class="form" id="inquireForm">
-    <h2 style="font-family:var(--ser);font-weight:400;font-size:32px;margin-bottom:8px">Write the lodge</h2>
-    <p style="color:#4a4f42;margin-bottom:8px">This opens a letter to {EMAIL}. If you are booking, telephone.</p>
-    <div class="fields">
-      <label for="n">Name</label><input id="n" name="Name" required>
-      <label for="e">Email</label><input id="e" name="Email" type="email" required>
-      <label for="ph">Phone</label><input id="ph" name="Phone" type="tel" required>
-      <label for="w">Interest</label>
-      <select id="w" name="Interest">
-        <option>Upland hunt</option><option>Blacktail deer</option><option>Wild hog</option>
-        <option>Bass fishing</option><option>Sporting clays</option><option>Lodge stay</option>
-        <option>Wedding</option><option>Corporate</option>
-      </select>
-      <label for="d">Preferred dates</label><input id="d" name="Dates">
-      <label for="m">Message</label><textarea id="m" name="Message"></textarea>
-      <button class="btn-primary" type="submit" style="margin-top:8px">Send</button>
+    <div class="invite-cta">
+      <a class="btn-primary" href="{TEL}">Call Us at {PHONE}</a>
     </div>
-    <p class="ok">Your mail app should open. If it does not, call {PHONE}.</p>
-  </form>
-  <div class="dir">
-    <b>Physical</b>18875 Red Bank Rd.<br>Red Bluff, California 96080
-    <b>Mailing</b>PO Box 8295<br>Red Bluff, CA 96080
-    <b>From I-5</b>
-    Take exit 647. Head west on Luther. Turn left on Paskenta, right on Live Oak. Live Oak becomes Red Bank. The ranch is on the left, six miles from town.
-    <b>Hours</b>
-    Hunts and lodging by reservation. Contact us for reservations and pricing.
+    <div class="invite-rule" aria-hidden="true"><span></span><span class="dm">&#9670;</span><span></span></div>
+    <div class="mono invite-rsvp">RSVP — or write the lodge</div>
+    <form class="form invite-form" id="inquireForm">
+      <div class="fields">
+        <label for="n">Name</label><input id="n" name="Name" required>
+        <label for="e">Email</label><input id="e" name="Email" type="email" required>
+        <label for="ph">Phone</label><input id="ph" name="Phone" type="tel" required>
+        <label for="w">Interest</label>
+        <select id="w" name="Interest">
+          <option>Upland hunt</option><option>Blacktail deer</option><option>Wild hog</option>
+          <option>Bass fishing</option><option>Sporting clays</option><option>Lodge stay</option>
+          <option>Wedding</option><option>Corporate</option>
+        </select>
+        <label for="d">Preferred dates</label><input id="d" name="Dates">
+        <label for="m">Message</label><textarea id="m" name="Message"></textarea>
+        <button class="btn-primary" type="submit" style="margin-top:8px">Send</button>
+      </div>
+      <p class="ok">Your mail app should open. If it does not, call {PHONE}.</p>
+    </form>
+    <p class="mono invite-fine">From I-5, take exit 647 · west on Luther · left on Paskenta · right on Live Oak, which becomes Red Bank · the ranch is on the left, six miles from town · Mail: PO Box 8295, Red Bluff, CA 96080</p>
   </div>
 </div>
 '''

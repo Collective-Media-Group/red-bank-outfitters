@@ -1361,3 +1361,127 @@ body.inner .nav{background:rgba(15,18,12,0.94)}
 /* Menu drawer stacks above the floating chat/phone UI (fab 9200 / panels 9300). */
 .drawer-backdrop{z-index:9500}
 .drawer{z-index:9600}
+
+/* ===== CONTACT — INVITATION ===== */
+.invite-page{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(201,169,97,.09), transparent 60%),
+    var(--forest);
+  padding:150px 20px 110px;
+}
+.invite-card{
+  max-width:760px;margin:0 auto;background:var(--bone);color:var(--forest);
+  padding:64px 48px 48px;position:relative;text-align:center;
+  border:1px solid rgba(11,10,8,.2);
+  box-shadow:0 40px 100px rgba(0,0,0,.5);
+}
+.invite-card::before{content:"";position:absolute;inset:10px;border:1px solid rgba(176,138,69,.55);pointer-events:none}
+.invite-card::after{content:"";position:absolute;inset:14px;border:1px solid rgba(176,138,69,.25);pointer-events:none}
+.invite-mark{width:54px;height:54px;margin:0 auto 18px;display:block}
+.invite-eyebrow{color:var(--brass);font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:22px}
+.invite-h1{font-family:var(--ser);font-weight:400;font-size:clamp(34px,6vw,52px);line-height:1.08;margin-bottom:18px;color:var(--ink)}
+.invite-h1 em{font-style:italic;color:var(--walnut)}
+.invite-sub{font-size:15px;line-height:1.7;color:#4a4f42;max-width:52ch;margin:0 auto}
+.invite-rule{display:flex;align-items:center;gap:14px;margin:30px auto;max-width:320px}
+.invite-rule span:first-child,.invite-rule span:last-child{flex:1;height:1px;background:rgba(176,138,69,.5)}
+.invite-rule .dm{color:var(--brass);font-size:9px;flex:0 0 auto}
+.invite-details{display:flex;flex-direction:column;gap:16px}
+.invite-details .k{display:block;color:var(--brass);font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;margin-bottom:4px}
+.invite-details .v{font-family:var(--ser);font-size:19px;color:var(--ink);text-decoration:none;word-break:break-word}
+.invite-details a.v:hover{color:var(--walnut)}
+.invite-cta{margin:26px 0 0}
+.invite-rsvp{color:var(--brass);font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px}
+.invite-form{text-align:left;max-width:520px;margin:0 auto}
+.invite-fine{margin:34px auto 0;font-size:10px;letter-spacing:.06em;line-height:1.9;color:rgba(11,10,8,.5);max-width:60ch}
+@media (max-width:600px){
+  .invite-page{padding:120px 12px 80px}
+  .invite-card{padding:48px 22px 36px}
+}
+
+/* ===== Breathing room between text and column rules ===== */
+.house-item{padding-left:24px}
+.house-grid .house-item:first-child{padding-left:0}
+@media (max-width:960px){
+  .house-item{padding:24px 20px 24px 20px}
+  .house-grid .house-item:nth-child(odd){padding-left:0}
+}
+@media (max-width:720px){
+  .house-item{padding-left:0}
+}
+.stat{padding-left:18px}
+.about-stats .stat:first-child{padding-left:0}
+.facts .f{padding-left:20px}
+.facts .f:first-child{padding-left:0}
+
+/* ===== READABILITY PASS — bolder, larger, higher contrast for older readers ===== */
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+:root{--ash:#6f6a5e}                          /* darker label gray */
+strong,b{font-weight:600}
+
+/* Headings: light serif weights up one step (display numerals stay) */
+.hero h1,.page-hero h1,.sec-head h2,.cta h2,.news-body h3,.wrow .wtxt h2,.invite-h1{font-weight:400}
+.hero h1 em,.page-hero h1 em,.cta h2 em{font-weight:400}
+
+/* Body copy: heavier and darker */
+.prose p{font-size:17px;font-weight:500;color:#2c3126}
+.prose ul li{font-size:16px;font-weight:500;color:#2c3126}
+.prose p.deck{font-weight:400;color:var(--ink)}
+.page-hero .lead{font-weight:500;font-size:18px;color:rgba(238,233,220,.95)}
+.hero-sub{font-weight:500;font-size:18px;color:rgba(238,233,220,.95)}
+.about-copy p + p{font-size:16px;font-weight:500;color:#2c3126}
+.house-item p{font-size:16px;font-weight:500}
+.cta-side p{font-weight:500}
+.wrow .wtxt p{font-size:16px;font-weight:500;color:#2c3126}
+.invite-sub{font-size:16px;font-weight:500;color:#2c3126}
+.aside p{font-size:15px;font-weight:500;color:#33382c}
+.aside .row{font-size:14px}
+.aside .row b{font-weight:600}
+.dir{font-weight:500}
+.news-panel p{font-weight:500}
+.call-pop p{font-weight:500}
+.consent-copy p{font-size:13.5px;font-weight:500;color:#3a3f32}
+
+/* Chat: larger, heavier messages */
+.msg{font-size:15px}
+.chat-panel .msg.bot{font-weight:500}
+.chat-chips button{font-size:11.5px}
+.chat-panel .chat-foot{font-size:10.5px}
+
+/* Fine print and micro labels: raise the floor */
+.invite-fine{font-size:11px;color:rgba(11,10,8,.62)}
+.invite-details .k{font-size:10.5px}
+.foot-col a{font-weight:500}
+.foot-bot{font-size:12px}
+
+/* Top breathing room for sections whose headings sat on the band edge */
+.pursuits-inner{padding-top:96px}
+.house-inner{padding-top:96px}
+@media (max-width:960px){
+  .pursuits-inner{padding-top:56px}
+  .house-inner{padding-top:56px}
+}
+
+/* About-image caption: scrim bar for readability, links to the Lodge */
+a.about-img{display:block;text-decoration:none;color:inherit}
+.about-img .cap{
+  left:0;right:0;bottom:0;padding:12px 20px;
+  background:linear-gradient(to top, rgba(15,18,12,.85), rgba(15,18,12,.55));
+}
+.about-img .cap .arr{margin-left:auto;color:var(--brass);transition:transform .2s ease}
+a.about-img:hover .cap .arr{transform:translateX(5px)}
+a.about-img:hover .cap .mono{color:var(--brass)}
+
+/* No glow on hover: card images keep constant brightness */
+.room:hover .img{filter:brightness(.8) saturate(.9)}
+.hunt-card:hover .bg{filter:brightness(.72) saturate(.9)}
+
+/* Pursuits text ticker */
+.hunt-ticker{margin:8px 0 40px;padding:14px 0}
+.hunt-ticker .marquee-track{animation-duration:60s}
+.hunt-ticker .marquee-group{gap:26px;padding-right:26px;align-items:center}
+.hunt-ticker .tk{font-family:var(--ser);font-size:19px;color:var(--walnut);white-space:nowrap}
+.hunt-ticker .dm{color:var(--brass);font-size:9px;flex:0 0 auto}
+
+/* Journal tab retired */
+.news-tab{display:none !important}

@@ -35,9 +35,9 @@ const img = (name) => `url("${rootPrefix}img/${name}")`;
 const imgs = {
   hero:   img('hero-oak.jpg'),
   about:  img('lodge-exterior.jpg'),
-  room1:  img('lodge.jpg'),
+  room1:  img('lodge-wide.jpg'),
   room2:  img('bunkhouse-porch.jpg'),
-  room3:  img('after-supper.jpg'),
+  room3:  img('table-supper.jpg'),
   j1:     img('pointer.jpg'),
   j2:     img('creek.jpg'),
   j3:     img('clays-station.jpg'),
@@ -412,7 +412,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   (function chat() {
     var KB = [
       { k: ['rate','price','cost','how much','pricing','fee','deposit'],
-        a: 'Rates are quoted by telephone rather than published — the price depends on the hunt, the party size and the dates. Call <a href="tel:' + TEL + '">' + PHONE + '</a> or see the <a href="' + href('rates.html') + '">rates page</a>.' },
+        a: '<strong>Personalized experiences.</strong> Rates are quoted by telephone — the price depends on the hunt, the party size and the dates. Call <a href="tel:' + TEL + '">' + PHONE + '</a> or see the <a href="' + href('rates.html') + '">rates page</a>.' },
       { k: ['quail','bobwhite','valley','mountain'],
         a: 'Three quail: <a href="' + href('upland/bobwhite.html') + '">bobwhite</a> southern-style over dogs, <a href="' + href('upland/valley-quail.html') + '">valley quail</a> and <a href="' + href('upland/mountain-quail.html') + '">mountain quail</a>. Quail has been the point of this ranch since 1965.' },
       { k: ['chukar','pheasant','turkey','european','driven','upland','bird'],
@@ -484,7 +484,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       '<div class="chat-head">' +
         '<button class="rb-x" type="button" aria-label="Close">&times;</button>' +
         '<span class="rb-k">Red Bank</span>' +
-        '<h3>The concierge</h3>' +
+        '<h3>Ask us a question</h3>' +
       '</div>' +
       '<div class="chat-log" id="rbChatLog" aria-live="polite"></div>' +
       '<div class="chat-chips">' +
