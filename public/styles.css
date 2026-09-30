@@ -1675,3 +1675,23 @@ a.about-img:hover .cap .mono{color:var(--brass)}
 .social-row a:hover{border-color:var(--brass);color:var(--brass);transform:translateY(-2px)}
 .social-row svg{width:16px;height:16px}
 .drawer-foot .social-row{margin-top:6px}
+
+/* ===== Heroes clear the fixed header on short windows =====
+   Content is bottom-aligned; without top padding a tall headline slides up
+   under the announcement bar + nav. The hero grows instead of overflowing. */
+.hero{height:auto;min-height:max(720px, 100vh)}
+.hero-inner{
+  height:auto;min-height:inherit;
+  padding-top:calc(var(--announce-h) + 118px);
+}
+.page-hero{height:auto;min-height:max(440px, 62vh);max-height:none}
+.page-hero-inner{
+  height:auto;min-height:inherit;
+  padding-top:calc(var(--announce-h) + 118px);
+}
+@media (max-height:860px) and (min-width:721px){
+  .hero{min-height:100vh}
+  .hero h1{font-size:clamp(40px, 5.2vw, 76px)}
+  .hero-eyebrow{margin-bottom:18px}
+  .hero-foot{margin-top:32px}
+}
