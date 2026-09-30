@@ -58,7 +58,18 @@
 # Individual posts mapped to their closest living page
 /2012/01/15/meiwinkel-hog-hunt                /hunts/wild-hog         301
 /2012/01/27/big-boar-taken-with-archery       /hunts/wild-hog         301
-/2018/03/06/upland-bird-hunting-in-full-swing-at-red-bank  /upland    301
+
+# Featured posts live on the blog now
+/2012/01/22/brotherhood-outdoors                              /news/brotherhood-outdoors                                        301
+/2012/02/15/red-bank-fregoso-outdoor-foundation-with-handicap-hunter-derik/news/red-bank-fregoso-outdoor-foundation-with-handicap-hunter-derik301
+/2012/03/19/grateful-nation-tv-show-films-red-bank            /news/grateful-nation-tv-show-films-red-bank                      301
+/2012/05/02/save-your-hunting-help-us-beat-down-sb1221        /news/save-your-hunting-help-us-beat-down-sb1221                  301
+/2012/05/25/the-grant-crim-hunt                               /news/the-grant-crim-hunt                                         301
+/2016/11/16/the-covey-chronicles                              /news/the-covey-chronicles                                        301
+/2018/03/06/upland-bird-hunting-in-full-swing-at-red-bank     /news/upland-bird-hunting-in-full-swing-at-red-bank               301
+/2018/12/13/around-the-ranch-red-bank-newsletter-november-2018/news/around-the-ranch-red-bank-newsletter-november-2018          301
+/2020/11/14/around-the-ranch-red-bank-newsletter-november-2019/news/around-the-ranch-red-bank-newsletter-november-2019          301
+/2020/11/14/around-the-ranch-red-bank-newsletter-october-2020 /news/around-the-ranch-red-bank-newsletter-october-2020           301
 
 # Every other dated post and archive page -> news
 /2012/*                                       /news                   301

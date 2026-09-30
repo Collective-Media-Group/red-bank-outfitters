@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const fmt = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const dateLabel = fmt.format(post.data.date);
+
+// Previous / next by date for the footer of the article
+const all = (await getCollection('news')).sort((a, b) => +b.data.date - +a.data.date);
+const i = all.findIndex((p) => p.id === post.id);
+const newer = i > 0 ? all[i - 1] : null;
+const older = i < all.length - 1 ? all[i + 1] : null;
+---
+<Base title={post.data.title + ' — Red Bank Outfitters'} description={post.data.excerpt} active="stay" inner={true}>
+  <header class="page-hero">
+    <div class="ph-bg" style={`background-image:url('${post.data.hero}')`} role="img" aria-label={post.data.title}></div>
+    <div class="page-hero-inner">
+      <div class="crumb mono"><a href="/">Home</a><span>/</span><a href="/news">News</a><span>/</span><span>{dateLabel}</span></div>
+      <h1>{post.data.title}</h1>
+      <p class="lead">{post.data.excerpt}</p>
+      <div class="ph-meta">
+        <div><div class="k">Posted</div><div class="v">{dateLabel}</div></div>
+        <div><div class="k">From</div><div class="v">The ranch</div></div>
+      </div>
+    </div>
+  </header>
+  <div class="page-body">
+    <article class="prose">
+      <Content />
+      <p style="margin-top:34px"><a class="mono post-back" href="/news">&larr; All news</a></p>
+      <nav class="post-nav mono" aria-label="More news">
+        {older && <a href={'/news/' + older.id}>&larr; {older.data.title}</a>}
+        {newer && <a href={'/news/' + newer.id} style="margin-left:auto">{newer.data.title} &rarr;</a>}
+      </nav>
+    </article>
+    <aside class="aside">
+      <h3>Booking and Reservations</h3>
+      <p>Contact us for reservations and pricing. Groups are never mixed, and there is no minimum party size.</p>
+      <div class="row"><span>Phone</span><b><a href="tel:+15305299435">(530) 529-9435</a></b></div>
+      <div class="row"><span>Email</span><b><a href="mailto:Hunting@RedBankOutfitters.com">Hunting@RedBankOutfitters.com</a></b></div>
+      <div class="row"><span>Address</span><b>18875 Red Bank Rd.<br />Red Bluff, CA 96080</b></div>
+      <a class="btn-primary" href="tel:+15305299435" style="margin-top:20px;width:100%;text-align:center">Call Us at (530) 529-9435</a>
+      <a class="btn-ghost" href="mailto:Hunting@RedBankOutfitters.com" style="margin-top:10px;width:100%;text-align:center;justify-content:center">Send message</a>
+    </aside>
+  </div>
+</Base>
