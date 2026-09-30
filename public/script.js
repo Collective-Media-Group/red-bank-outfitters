@@ -257,6 +257,11 @@ if (newsModal){
       [name, email, phone].forEach(f => { if (!f.checkValidity() || !f.value.trim()) f.style.borderColor = '#b8381f'; });
       return;
     }
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(newsForm)).toString()
+    }).catch(() => {});
     newsForm.hidden = true;
     newsThanks.hidden = false;
     setTimeout(closeNews, 4200);
@@ -268,10 +273,24 @@ if (inquire){
   inquire.addEventListener('submit', (e) => {
     e.preventDefault();
     const fd = new FormData(inquire);
-    const body = [...fd.entries()].map(([k,v]) => `${k}: ${v}`).join('\n');
-    const mail = `mailto:Hunting@RedBankOutfitters.com?subject=${encodeURIComponent('Hunt inquiry — Red Bank Outfitters')}&body=${encodeURIComponent(body)}`;
-    inquire.classList.add('sent');
-    window.location.href = mail;
+    const btn = inquire.querySelector('button[type="submit"]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(fd).toString()
+    }).then((r) => {
+      if (!r.ok) throw new Error(r.status);
+      inquire.classList.add('sent');
+    }).catch(() => {
+      /* Netlify unreachable (e.g. local preview): fall back to the mail app. */
+      const text = [...fd.entries()]
+        .filter(([k]) => k !== 'form-name' && k !== 'bot-field')
+        .map(([k,v]) => `${k}: ${v}`).join('\n');
+      window.location.href = `mailto:Hunting@RedBankOutfitters.com?subject=${encodeURIComponent('Hunt inquiry — Red Bank Outfitters')}&body=${encodeURIComponent(text)}`;
+    }).finally(() => {
+      if (btn) { btn.disabled = false; btn.textContent = 'Send'; }
+    });
   });
 }
 

@@ -136,7 +136,7 @@ const v = Date.now().toString(36);
   <div class="drawer-body">
     <nav class="drawer-col" aria-label="Outfitters">
       <h4 class="mono">Outfitters</h4>
-      <a href="/hunts">The Hunt</a>
+      <a href="/hunts">Hunting</a>
       <a href="/upland">Upland Game</a>
       <a href="/big-game">Big Game</a>
       <a href="/bass">Bass Fishing</a>
@@ -167,7 +167,6 @@ const v = Date.now().toString(36);
   <div class="drawer-foot">
     <div class="drawer-contact"><div class="mono k">Phone</div><a class="v" href={TEL}>{PHONE}</a></div>
     <div class="drawer-contact"><div class="mono k">Location</div><div class="v">18875 Red Bank Rd., Red Bluff CA</div></div>
-    <div class="drawer-contact"><div class="mono k">Mail</div><div class="v">PO Box 8295, Red Bluff CA</div></div>
     <div class="drawer-contact"><div class="mono k">Follow</div><div class="social-row">
         <a href="https://www.instagram.com/redbankoutfitters/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
         <a href="https://www.facebook.com/Redbankoutfitters/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7z"/></svg></a>
@@ -215,7 +214,7 @@ const v = Date.now().toString(36);
     <div class="wordmark">Red <em>Bank</em></div>
     <div class="foot-bot">
       <span>&copy; Red Bank Outfitters · Est. 1965</span>
-      <span class="mono">Red Bluff, California · 18,000 ac</span>
+      <span class="mono">Red Bluff, California · Powered by AI Wrangler</span>
       <a href="#" data-open-consent>Privacy Choices</a>
       {OS_PATH && <a class="os-login" href={OS_PATH}>Ranch Login</a>}
     </div>
@@ -258,7 +257,9 @@ const v = Date.now().toString(36);
       <div class="mono news-eyebrow">— From the 1965 Society</div>
       <h3 id="newsTitle">The 1965 <em>Society</em></h3>
       <p class="news-sub">Leave a name. The lodge will send season dates when they go out — never a list we sell.</p>
-      <form class="news-form" id="newsForm" novalidate>
+      <form class="news-form" id="newsForm" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="newsletter" />
+        <p hidden><label>Leave this empty <input name="bot-field" /></label></p>
         <div class="news-row">
           <div class="news-field"><label for="newsName">First name</label><input type="text" id="newsName" name="name" autocomplete="given-name" required /></div>
           <div class="news-field"><label for="newsEmail">Email</label><input type="email" id="newsEmail" name="email" autocomplete="email" required /></div>
