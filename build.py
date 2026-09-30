@@ -863,8 +863,8 @@ add("dining.html", page(0, "Dining — Red Bank Outfitters",
 [("Home","index.html"),("Dining","")],
 "Dining",
 "Meals prepared and served by the household staff. A selection of California wines. Breakfasts before the walk-up.",
-[("Notice","2 days"),("Day hunt","Arrive 1 p.m."),("Wine","California")],
-"dining.jpg", "The lodge dining room and a table of hunters at Red Bank",
+[],
+"lodge-wide.jpg", "The long dining table in the new lodge great room — candles lit, fireplace burning",
 '''<p class="deck">Legendary home-cooked meals, in their words. Courteous household staff. California wines to match.</p>
 <p>Day shooters eat before and after an afternoon hunt. Give two days' notice. Plan on arriving by 1 p.m. They will host lunch and the afternoon.</p>
 <p>Weddings and corporate dinners use the same kitchen and the 2,200-square-foot covered patio.</p>''',
@@ -971,7 +971,7 @@ RATES_BODY = f'''
   <div class="hero-inner">
     <div class="hero-eyebrow">
       <span class="dash"></span>
-      <span class="mono">Rates · Red Bluff, California</span>
+      <span class="mono">Request Information</span>
     </div>
     <h1>Rates &amp; Packages</h1>
     <p class="hero-sub">
@@ -1003,7 +1003,7 @@ CONTACT_BODY = f'''
     <div class="invite-details">
       <div><span class="k mono">Telephone</span><a class="v" href="{TEL}">{PHONE}</a></div>
       <div><span class="k mono">Email</span><a class="v" href="mailto:{EMAIL}">{EMAIL}</a></div>
-      <div><span class="k mono">The Gate</span><span class="v">18875 Red Bank Rd, Red Bluff</span></div>
+      <div><span class="k mono">Located At</span><span class="v">18875 Red Bank Rd, Red Bluff</span></div>
     </div>
     <div class="invite-cta">
       <a class="btn-primary" href="{TEL}">Call Us at {PHONE}</a>
@@ -1031,6 +1031,82 @@ CONTACT_BODY = f'''
   </div>
 </div>
 '''
+POSTCARD_BODY = f'''
+<div class="pc-page">
+  <div class="pc-intro">
+    <div class="mono pc-label">Mock-up — Direct Mail Postcard · 6 &times; 4</div>
+    <h1 class="pc-h1">The invitation, <em>by post.</em></h1>
+  </div>
+
+  <div class="mono pc-side-label">Front</div>
+  <div class="pc-card pc-front">
+    <div class="pc-photo" style="background-image:url('img/lodge-landscape.jpg')" role="img" aria-label="The new lodge at Red Bank, west of Red Bluff"></div>
+    <div class="pc-front-foot">
+      <div class="pc-wordmark">RED BANK <em>OUTFITTERS</em></div>
+      <div class="mono pc-front-line">The private Southern-style quail hunting ranch · Est. 1965 · Red Bluff, California</div>
+    </div>
+  </div>
+
+  <div class="mono pc-side-label">Back</div>
+  <div class="pc-card pc-back">
+    <div class="pc-letter">
+      <p class="pc-salute">Dear Friend,</p>
+      <p>Since 1965, Red Bank has opened its gate to one party at a time — eighteen thousand acres on Red Bank Creek, west of Red Bluff. This fall we finish something we have wanted to build for years: a new lodge worthy of the ground it sits on.</p>
+      <p>I would like you to see it. Come walk the meadow, meet the dogs, and stay for supper at the long table. Bring your own party — we will never mix you with another.</p>
+      <p>Reservations for the 26–27 season are open. Call us at <strong>{PHONE}</strong> — or <a href="contact.html">send us an email</a> — and we will hold your dates.</p>
+      <p class="pc-sig">Brian Riley</p>
+      <p class="mono pc-sig-title">Owner, Red Bank Outfitters</p>
+    </div>
+    <div class="pc-divider" aria-hidden="true"></div>
+    <div class="pc-address">
+      <div class="pc-stamp" aria-hidden="true">
+        <img src="img/mark.svg" alt="" width="34" height="34">
+        <span class="mono">EST.<br>1965</span>
+      </div>
+      <div class="pc-postmark mono" aria-hidden="true">RED BLUFF · CALIFORNIA · RED BANK CREEK ·</div>
+      <div class="pc-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="mono pc-return">Red Bank Outfitters · 18875 Red Bank Rd, Red Bluff, CA 96080 · RedBankOutfitters.com · {PHONE}</div>
+    </div>
+  </div>
+
+  <div class="mono pc-side-label">Text message — copy &amp; send from your contacts</div>
+  <div class="pc-sms">
+    <p class="pc-bubble" id="pcSmsText">hey, it's brian out at red bank. the new lodge is finally open and we're booking the 26–27 season now. space is limited, take a look: https://red-bank-outfitters.netlify.app/lodge.html — call or text me if you want to book a hunt</p>
+    <button class="btn-primary" type="button" id="pcCopyBtn">Copy message</button>
+  </div>
+</div>
+
+<script>
+(function () {{
+  var btn = document.getElementById('pcCopyBtn');
+  var txt = document.getElementById('pcSmsText');
+  if (!btn || !txt) return;
+  btn.addEventListener('click', function () {{
+    var t = txt.textContent.replace(/\s+/g, ' ').trim();
+    function done() {{ btn.textContent = 'Copied'; setTimeout(function () {{ btn.textContent = 'Copy message'; }}, 1600); }}
+    if (navigator.clipboard && navigator.clipboard.writeText) {{
+      navigator.clipboard.writeText(t).then(done, function () {{ fallback(); }});
+    }} else {{ fallback(); }}
+    function fallback() {{
+      var ta = document.createElement('textarea');
+      ta.value = t; document.body.appendChild(ta); ta.select();
+      try {{ document.execCommand('copy'); done(); }} catch (e) {{}}
+      document.body.removeChild(ta);
+    }}
+  }});
+}})();
+</script>
+'''
+# Marketing concept: no site chrome — just the head, the mock-up, done.
+add("postcard.html", head(0, "Postcard Mock-up — Red Bank Outfitters",
+"Direct-mail postcard mock-up: the new lodge on the front, a letter of invitation from owner Brian Riley on the back.")
++ f'''
+<body class="inner" data-root="">
+{POSTCARD_BODY}
+</body>
+</html>
+''')
+
 add("contact.html", wrap(0, "Contact — Red Bank Outfitters",
 "Contact Red Bank Outfitters — (530) 529-9435. 18875 Red Bank Rd, Red Bluff CA 96080. I-5 exit 647, six miles from town.",
 CONTACT_BODY, active="stay"))

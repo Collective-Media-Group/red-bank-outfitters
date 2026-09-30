@@ -1485,3 +1485,61 @@ a.about-img:hover .cap .mono{color:var(--brass)}
 
 /* Journal tab retired */
 .news-tab{display:none !important}
+
+/* ===== POSTCARD MOCK-UP ===== */
+.pc-page{max-width:1000px;margin:0 auto;padding:150px 20px 110px}
+.pc-intro{text-align:center;margin-bottom:44px}
+.pc-label{color:var(--brass);font-size:10px;letter-spacing:.28em;text-transform:uppercase;margin-bottom:14px}
+.pc-h1{font-family:var(--ser);font-weight:400;font-size:clamp(30px,5vw,44px);color:var(--ink)}
+.pc-h1 em{font-style:italic;color:var(--walnut)}
+.pc-side-label{color:var(--ash);font-size:10px;letter-spacing:.24em;text-transform:uppercase;margin:34px 0 10px}
+.pc-card{
+  aspect-ratio:6/4;background:#fbf8f1;border:1px solid rgba(11,10,8,.18);
+  box-shadow:0 24px 60px rgba(11,10,8,.25);position:relative;overflow:hidden;
+}
+.pc-front .pc-photo{position:absolute;inset:0;background-size:cover;background-position:center}
+.pc-front-foot{
+  position:absolute;left:0;right:0;bottom:0;padding:22px 28px;
+  background:linear-gradient(to top, rgba(15,18,12,.85), transparent);
+  display:flex;flex-direction:column;gap:6px;
+}
+.pc-wordmark{font-family:var(--ser);font-size:26px;letter-spacing:.06em;color:var(--bone)}
+.pc-wordmark em{font-style:italic;color:var(--brass)}
+.pc-front-line{color:rgba(238,233,220,.92);font-size:10px;letter-spacing:.18em;text-transform:uppercase}
+.pc-back{display:grid;grid-template-columns:1.15fr 1px 1fr}
+.pc-letter{padding:34px 30px;overflow:hidden}
+.pc-letter p{font-family:var(--ser);font-size:14.5px;line-height:1.55;color:#2c3126;margin-bottom:10px}
+.pc-salute{font-style:italic}
+.pc-sig{font-family:var(--ser);font-style:italic;font-size:26px;color:var(--walnut);margin:14px 0 2px}
+.pc-sig-title{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ash)}
+.pc-divider{background:rgba(11,10,8,.2)}
+.pc-address{position:relative;padding:26px 26px 22px;display:flex;flex-direction:column}
+.pc-stamp{
+  position:absolute;top:20px;right:20px;width:74px;height:88px;
+  border:1px dashed rgba(176,138,69,.8);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;color:var(--walnut);
+  font-size:9px;letter-spacing:.14em;text-align:center;background:rgba(176,138,69,.06);
+}
+.pc-postmark{
+  width:96px;height:96px;border:1.5px solid rgba(11,10,8,.3);border-radius:50%;
+  font-size:8px;letter-spacing:.14em;color:rgba(11,10,8,.45);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:16px;transform:rotate(-8deg);margin:6px 0 0 6px;
+}
+.pc-lines{margin-top:auto;display:flex;flex-direction:column;gap:26px;padding-right:10px}
+.pc-lines span{height:1px;background:rgba(11,10,8,.35)}
+.pc-return{margin-top:22px;font-size:8.5px;letter-spacing:.1em;color:rgba(11,10,8,.5);line-height:1.6}
+@media (max-width:720px){
+  .pc-card{aspect-ratio:auto}
+  .pc-back{grid-template-columns:1fr}
+  .pc-divider{height:1px}
+  .pc-lines{gap:20px;margin-top:26px}
+}
+
+/* Postcard page: SMS concept */
+.pc-sms{max-width:560px}
+.pc-bubble{
+  background:#e9e4d6;border:1px solid rgba(11,10,8,.14);border-radius:18px 18px 18px 4px;
+  padding:16px 18px;font-size:15px;line-height:1.6;color:#2c3126;margin-bottom:14px;
+  word-break:break-word;
+}
