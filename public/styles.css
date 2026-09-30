@@ -1571,3 +1571,28 @@ a.about-img:hover .cap .mono{color:var(--brass)}
 /* Concierge action buttons: solid */
 .chat-actions .ca{background:var(--brass);border-color:var(--brass);color:var(--ink);font-weight:500}
 .chat-actions .ca:hover{background:#c4a05a;border-color:#c4a05a;color:var(--ink)}
+
+/* Parallax band with slow-fading layers */
+.parallax-fade{position:relative;overflow:hidden}
+.parallax-fade .pf{
+  position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;
+  background-size:cover;background-position:center;background-attachment:fixed;
+}
+.parallax-fade .pf.on{opacity:1}
+@media (max-width:900px), (prefers-reduced-motion: reduce){
+  .parallax-fade .pf{background-attachment:scroll}
+}
+@supports (-webkit-touch-callout: none){
+  .parallax-fade .pf{background-attachment:scroll}
+}
+
+/* Hide on phones (lodge page great-room block) */
+@media (max-width:900px){ .hide-mobile{display:none !important} }
+
+/* Above-Experience band: single still on desktop, rotating set on phones */
+@media (min-width:901px){
+  .pfade-mobile .pf:not(:first-child){display:none}
+}
+
+/* Hunt cards: no hover motion */
+.hunt-card:hover .bg{transform:none}

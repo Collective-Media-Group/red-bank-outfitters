@@ -37,7 +37,7 @@ const imgs = {
   about:  img('lodge-exterior.jpg'),
   room1:  img('lodge-wide.jpg'),
   room2:  img('bunkhouse-porch.jpg'),
-  room3:  img('table-supper.jpg'),
+  room3:  img('dining-table.jpg'),
   j1:     img('pointer.jpg'),
   j2:     img('creek.jpg'),
   j3:     img('clays-station.jpg'),
@@ -174,6 +174,7 @@ counters.forEach(el => cio.observe(el));
 
 /* ---------- Hover parallax on .tilt cards ---------- */
 document.querySelectorAll('.tilt').forEach(card => {
+  if (card.classList.contains('hunt-card')) return;  // hunt grid sits still
   card.addEventListener('mousemove', (e) => {
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left)/rect.width - 0.5;
@@ -667,5 +668,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   bar.querySelector('[data-mob-chat]').addEventListener('click', function () {
     var fab = document.querySelector('.chat-fab');
     if (fab) fab.click();
+  });
+})();
+
+/* ---------- Fading parallax bands (lodge page) ---------- */
+(function () {
+  var mobile = window.matchMedia('(max-width: 900px)').matches;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.parallax-fade').forEach(function (wrap) {
+    var layers = wrap.querySelectorAll('.pf');
+    if (!layers.length) return;
+    layers[0].classList.add('on');
+    if (layers.length < 2 || reduced) return;
+    /* The band above Experience only rotates on phones; on desktop it
+       holds its first frame and the lower band does the fading. */
+    if (wrap.classList.contains('pfade-mobile') && !mobile) return;
+    var i = 0;
+    setInterval(function () {
+      layers[i].classList.remove('on');
+      i = (i + 1) % layers.length;
+      layers[i].classList.add('on');
+    }, 5000);
   });
 })();
