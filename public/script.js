@@ -691,3 +691,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }, 5000);
   });
 })();
+
+/* ---------- Analytics (consent-gated, carried over from redbankhunting.com) ----------
+   The old site ran Google Analytics UA-740430-2. UA properties stopped
+   processing data in 2023 — swap GA_ID for the account's GA4 "G-" id and
+   this loader works unchanged. Loads only after the visitor accepts. */
+(function () {
+  var GA_ID = 'UA-740430-2';
+  var loaded = false;
+  function loadGA() {
+    if (loaded) return; loaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+  if (window.__rboConsent === 'accepted') loadGA();
+  window.addEventListener('rbo:consent', function (e) {
+    if (e.detail && e.detail.choice === 'accepted') loadGA();
+  });
+})();
