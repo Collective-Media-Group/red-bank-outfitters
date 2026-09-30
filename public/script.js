@@ -289,7 +289,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* ==========================================================================
    HERO VIDEO + FLOATING UI
    Injected at runtime so all 25 pages get it with no HTML edits.
-   (build.py rewrites the .html files but never touches script.js/styles.css.)
+   (Astro serves this file from public/ — it is never rewritten by the build.)
    ========================================================================== */
 (function () {
   'use strict';
@@ -414,25 +414,25 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       { k: ['rate','price','cost','how much','pricing','fee','deposit'],
         a: '<strong>Personalized experiences.</strong> Rates are quoted by telephone — the price depends on the hunt, the party size and the dates. Call <a href="tel:' + TEL + '">' + PHONE + '</a> or see the <a href="' + href('rates') + '">rates page</a>.' },
       { k: ['quail','bobwhite','valley','mountain'],
-        a: 'Three quail: <a href="' + href('upland/bobwhite.html') + '">bobwhite</a> southern-style over dogs, <a href="' + href('upland/valley-quail.html') + '">valley quail</a> and <a href="' + href('upland/mountain-quail.html') + '">mountain quail</a>. Quail has been the point of this ranch since 1965.' },
+        a: 'Three quail: <a href="' + href('upland/bobwhite') + '">bobwhite</a> southern-style over dogs, <a href="' + href('upland/valley-quail') + '">valley quail</a> and <a href="' + href('upland/mountain-quail') + '">mountain quail</a>. Quail has been the point of this ranch since 1965.' },
       { k: ['chukar','pheasant','turkey','european','driven','upland','bird'],
-        a: 'Upland runs to seven birds — quail, <a href="' + href('upland/chukar.html') + '">chukar</a>, <a href="' + href('upland/pheasant.html') + '">pheasant</a>, <a href="' + href('upland/turkey.html') + '">wild turkey</a> and a <a href="' + href('upland/european-drive.html') + '">European driven shoot</a>. The full list is on the <a href="' + href('upland.html') + '">upland page</a>.' },
+        a: 'Upland runs to seven birds — quail, <a href="' + href('upland/chukar') + '">chukar</a>, <a href="' + href('upland/pheasant') + '">pheasant</a>, <a href="' + href('upland/turkey') + '">wild turkey</a> and a <a href="' + href('upland/european-drive') + '">European driven shoot</a>. The full list is on the <a href="' + href('upland') + '">upland page</a>.' },
       { k: ['deer','blacktail','black-tail','big game','elk'],
-        a: 'Black-tail deer and wild hog are the big game here — see <a href="' + href('hunts/blacktail.html') + '">blacktail</a> and <a href="' + href('hunts/wild-hog.html') + '">wild hog</a>.' },
+        a: 'Black-tail deer and wild hog are the big game here — see <a href="' + href('hunts/blacktail') + '">blacktail</a> and <a href="' + href('hunts/wild-hog') + '">wild hog</a>.' },
       { k: ['hog','pig','boar'],
-        a: '<a href="' + href('hunts/wild-hog.html') + '">Wild hog</a> is hunted across the 18,000 acres. Call the lodge for current conditions.' },
+        a: '<a href="' + href('hunts/wild-hog') + '">Wild hog</a> is hunted across the 18,000 acres. Call the lodge for current conditions.' },
       { k: ['bass','fish','fishing','pond'],
-        a: 'Eleven ponds hold bass — details on the <a href="' + href('bass.html') + '">bass fishing page</a>.' },
+        a: 'Eleven ponds hold bass — details on the <a href="' + href('bass') + '">bass fishing page</a>.' },
       { k: ['clay','sporting','shotgun','station','trap','skeet'],
-        a: 'An 18-station <a href="' + href('clays.html') + '">sporting clays</a> course runs through the ranch.' },
+        a: 'An 18-station <a href="' + href('clays') + '">sporting clays</a> course runs through the ranch.' },
       { k: ['dog','kennel','pointer','retriev'],
-        a: 'The ranch keeps its own dogs and <a href="' + href('kennels.html') + '">kennels</a> on site, so you do not need to bring one.' },
+        a: 'The ranch keeps its own dogs and <a href="' + href('kennels') + '">kennels</a> on site, so you do not need to bring one.' },
       { k: ['lodge','sleep','stay','room','accommodat','bed','bunk'],
-        a: 'The <a href="' + href('lodge') + '">lodge</a> sleeps fourteen with three showers and a full kitchen; the <a href="' + href('bunkhouse.html') + '">bunkhouse</a> sleeps six. Groups are never mixed — the house is yours.' },
+        a: 'The <a href="' + href('lodge') + '">lodge</a> sleeps fourteen with three showers and a full kitchen; the <a href="' + href('bunkhouse') + '">bunkhouse</a> sleeps six. Groups are never mixed — the house is yours.' },
       { k: ['eat','food','meal','dining','dinner','cook','chef','breakfast'],
-        a: 'Meals are served in the lodge — see <a href="' + href('dining.html') + '">dining</a>.' },
+        a: 'Meals are served in the lodge — see <a href="' + href('dining') + '">dining</a>.' },
       { k: ['wedding','event','venue','marry','reception'],
-        a: 'The ranch hosts weddings and events. The <a href="' + href('weddings.html') + '">weddings page</a> has the detail, then call to hold a date.' },
+        a: 'The ranch hosts weddings and events. The <a href="' + href('weddings') + '">weddings page</a> has the detail, then call to hold a date.' },
       { k: ['where','address','direction','located','location','map','drive','red bluff'],
         a: 'Red Bank Outfitters is at ' + ADDR + ' — 18,000 acres west of Red Bluff on Red Bank Creek. Full detail on the <a href="' + href('contact') + '">contact page</a>.' },
       { k: ['season','when','date','open','availab','book','reserv','calendar'],
@@ -442,11 +442,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       { k: ['contact','phone','call','email','reach','number','talk'],
         a: 'Call <a href="tel:' + TEL + '">' + PHONE + '</a> or email <a href="mailto:' + EMAIL + '">' + EMAIL + '</a>.' },
       { k: ['acre','big','size of','how large','ranch','land','history','1965','old'],
-        a: 'Eighteen thousand acres west of Red Bluff, in the family and hunted since 1965. More on <a href="' + href('the-ranch.html') + '">the ranch</a>.' },
+        a: 'Eighteen thousand acres west of Red Bluff, in the family and hunted since 1965. More on <a href="' + href('the-ranch') + '">the ranch</a>.' },
       { k: ['academy','kid','youth','camp','class','learn','course'],
         a: 'Youth and instruction run through the <a href="https://redbankoutdooracademy.com/" target="_blank" rel="noopener">Red Bank Outdoor Academy</a>.' },
       { k: ['photo','gallery','picture','image','video','film','see'],
-        a: 'The <a href="' + href('gallery.html') + '">gallery</a> has photographs of the ranch and the lodge.' },
+        a: 'The <a href="' + href('gallery') + '">gallery</a> has photographs of the ranch and the lodge.' },
       { k: ['licen','tag','legal','regulat','permit'],
         a: 'Licensing and tags depend on the species and the season — the lodge will walk you through it. Call <a href="tel:' + TEL + '">' + PHONE + '</a>.' },
       { k: ['hello','hi','hey','howdy','good morning','good evening'],
