@@ -675,10 +675,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 (function () {
   var mobile = window.matchMedia('(max-width: 900px)').matches;
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function syncCaption(wrap, layer) {
+    var label = layer.getAttribute('data-label');
+    var href = layer.getAttribute('data-href');
+    if (label) {
+      var t = wrap.querySelector('.cap .mono');
+      if (t) t.textContent = label;
+    }
+    if (href && wrap.tagName === 'A') wrap.setAttribute('href', href);
+  }
   document.querySelectorAll('.parallax-fade, .img-fade').forEach(function (wrap) {
     var layers = wrap.querySelectorAll('.pf, .ph');
     if (!layers.length) return;
     layers[0].classList.add('on');
+    syncCaption(wrap, layers[0]);
     if (layers.length < 2 || reduced) return;
     /* The band above Experience only rotates on phones; on desktop it
        holds its first frame and the lower band does the fading. */
@@ -688,6 +698,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       layers[i].classList.remove('on');
       i = (i + 1) % layers.length;
       layers[i].classList.add('on');
+      syncCaption(wrap, layers[i]);
     }, 5000);
   });
 })();
